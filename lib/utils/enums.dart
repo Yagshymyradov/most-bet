@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/l10n.dart';
 import 'assets.dart';
 import 'theme/theme.dart';
 
@@ -36,24 +37,25 @@ enum WorkoutTypes {
   crossfit,
   pump;
 
-  String asValue() {
+  String asValue(BuildContext context) {
+    final l10n = context.l10n;
     switch (this) {
       case WorkoutTypes.swimming:
-        return 'Swimming';
+        return l10n.swimming;
       case WorkoutTypes.yoga:
-        return 'Yoga';
+        return l10n.yoga;
       case WorkoutTypes.cardio:
-        return 'Cardio';
+        return l10n.cardio;
       case WorkoutTypes.functionalTraining:
-        return 'Functional Trading';
+        return l10n.functionalTrading;
       case WorkoutTypes.stretching:
-        return 'Stretching';
+        return l10n.stretching;
       case WorkoutTypes.rollRelax:
-        return 'Roll Relax';
+        return l10n.rollRelax;
       case WorkoutTypes.crossfit:
-        return 'Crossfit';
+        return l10n.crossfit;
       case WorkoutTypes.pump:
-        return 'Pump';
+        return l10n.pump;
     }
   }
 

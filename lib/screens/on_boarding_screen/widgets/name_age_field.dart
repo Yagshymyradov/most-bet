@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/field_text.dart';
+import '../../../l10n/l10n.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
 
@@ -27,24 +28,26 @@ class _NameAgeFieldState extends State<NameAgeField> {
   Widget build(BuildContext context) {
     final fieldsIsNotEmpty = nameController.text.isNotEmpty && ageController.text.isNotEmpty;
     final textTheme = context.textTheme;
+    final l10n = context.l10n;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
           const SizedBox(height: 134),
           Text(
-            'Let’s create your profile!',
+            l10n.letsCreteProfile,
             textAlign: TextAlign.center,
             style: textTheme.titleLarge,
           ),
           Text(
-            'Add your name and your age',
+            l10n.addYourNameAge,
             textAlign: TextAlign.center,
             style: textTheme.headlineMedium,
           ),
           const SizedBox(height: 40),
           FieldText(
-            hintText: 'Name',
+            hintText: l10n.name,
             controller: nameController,
             onChanged: (val) {
               updateUi();
@@ -53,7 +56,7 @@ class _NameAgeFieldState extends State<NameAgeField> {
           ),
           const SizedBox(height: 16),
           FieldText(
-            hintText: 'age',
+            hintText: l10n.age,
             controller: ageController,
             onChanged: (val) {
               updateUi();
@@ -69,7 +72,7 @@ class _NameAgeFieldState extends State<NameAgeField> {
               ),
             ),
             child: Text(
-              'Next',
+              l10n.next,
               style: textTheme.titleSmall,
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/l10n.dart';
 import '../../../utils/enums.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
@@ -33,6 +34,7 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
+    final l10n = context.l10n;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -40,12 +42,12 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
         children: [
           const SizedBox(height: 134),
           Text(
-            'Let’s create your profile!',
+            l10n.letsCreteProfile,
             textAlign: TextAlign.center,
             style: textTheme.titleLarge,
           ),
           Text(
-            'Choose your favorite types of workout',
+            l10n.chooseFavoriteWorkout,
             textAlign: TextAlign.center,
             style: textTheme.headlineMedium,
           ),
@@ -69,7 +71,7 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
                           vertical: 8,
                         ),
                         child: Text(
-                          e.asValue(),
+                          e.asValue(context),
                           style: textTheme.headlineMedium?.copyWith(
                             color: AppColors.whiteColor,
                           ),
@@ -91,7 +93,7 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
               ),
             ),
             child: Text(
-              'Next',
+              l10n.next,
               style: textTheme.titleSmall,
             ),
           ),

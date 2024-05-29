@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/profile_image.dart';
+import '../../../l10n/l10n.dart';
 import '../../../utils/enums.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
@@ -30,18 +31,20 @@ class _ChooseProfilePhotoState extends State<ChooseProfilePhoto> {
   @override
   Widget build(BuildContext context) {
     final textTheme = context.textTheme;
+    final l10n = context.l10n;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
           const SizedBox(height: 104),
           Text(
-            'Let’s create your profile!',
+            l10n.letsCreteProfile,
             textAlign: TextAlign.center,
             style: textTheme.titleLarge,
           ),
           Text(
-            'Choose your character photo',
+            l10n.chooseYourPhoto,
             textAlign: TextAlign.center,
             style: textTheme.headlineMedium,
           ),
@@ -74,7 +77,7 @@ class _ChooseProfilePhotoState extends State<ChooseProfilePhoto> {
               ),
             ),
             child: Text(
-              'Next',
+              l10n.next,
               style: textTheme.titleSmall,
             ),
           ),

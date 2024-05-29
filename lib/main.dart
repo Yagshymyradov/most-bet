@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'l10n/l10n.dart' as l10n;
+
 import 'screens/splash_screen.dart';
 import 'utils/theme/theme.dart';
 
@@ -13,6 +15,9 @@ class MostBetApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      supportedLocales: l10n.AppLocalizations.supportedLocales,
+      localizationsDelegates: l10n.AppLocalizationsX.localizationsDelegates,
+      locale: l10n.LocaleEnglish,
       theme: AppTheme.lightTheme,
       home: const SplashScreen(),
     );

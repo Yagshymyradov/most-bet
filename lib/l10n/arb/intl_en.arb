@@ -1,0 +1,36 @@
+{
+  "@@locale": "en",
+
+  "localeCode": "en",
+  "nativeLocaleName": "English",
+
+  "letsCreteProfile": "Let’s create your profile!",
+  "addYourNameAge": "Add your name and your age",
+  "name": "Name",
+  "age": "Age",
+  "next": "Next",
+  "chooseYourPhoto": "Choose your character photo",
+  "chooseFavoriteWorkout": "Choose your favorite types of workout",
+  "swimming": "Swimming",
+  "yoga": "Yoga",
+  "cardio": "Cardio",
+  "functionalTrading": "Functional Trading",
+  "stretching": "Stretching",
+  "rollRelax": "Roll Relax",
+  "crossfit": "Crossfit",
+  "pump": "Pump",
+
+
+  "januaryShort": "Jan.",
+  "februaryShort": "Feb.",
+  "marchShort": "March",
+  "aprilShort": "April",
+  "mayShort": "May",
+  "juneShort": "June",
+  "julyShort": "July",
+  "augustShort": "Aug.",
+  "septemberShort": "Sep.",
+  "octoberShort": "Oct.",
+  "novemberShort": "Nov.",
+  "decemberShort": "Dec."
+}
