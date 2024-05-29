@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../components/linear_percent_indicator.dart';
-import '../theme/theme.dart';
 import '../utils/assets.dart';
 import '../utils/navigation.dart';
-import 'on_boarding_screen.dart';
+import '../utils/theme/theme.dart';
+import 'on_boarding_screen/on_boarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -41,23 +41,24 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       ..forward();
   }
 
-  @override
-  void dispose() {
-    animController.dispose();
-
-    super.dispose();
-  }
-
   void durationSecond() {
-    Timer.periodic(
-      const Duration(milliseconds: 800),
-      (timer) {
+    timer = Timer.periodic(
+      const Duration(milliseconds: 900),
+          (timer) {
         percent += 0.5;
         setState(() {
           //no-op
         });
       },
     );
+  }
+
+  @override
+  void dispose() {
+    animController.dispose();
+    timer?.cancel();
+
+    super.dispose();
   }
 
   @override
@@ -76,8 +77,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               animation: true,
               animateFromLastPercent: true,
               barRadius: const Radius.circular(10),
-              backgroundColor: AppColors.darkGreyColor,
-              progressColor: AppColors.darkOrangeColor,
+              backgroundColor: AppColors.textSecondaryColor,
+              progressColor: AppColors.primaryColor,
             ),
           ),
         ],

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum AppIcons {
+  boy('boy'),
+  girl('girl'),
+  dog('dog'),
   logoReviewers('logo-reviewers');
 
   final String path;
@@ -10,7 +13,7 @@ enum AppIcons {
 
   String get _svg => 'assets/icons/$path.svg';
 
-  String get _png => 'assets/icons/$path.png';
+  String get _png => 'assets/images/$path.png';
 
   String get _jpg => 'assets/icons/$path.jpg';
 
