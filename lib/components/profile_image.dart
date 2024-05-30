@@ -19,8 +19,8 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 174,
-      height: 174,
+      width: width,
+      height: height,
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum AppIcons {
+  blush('blush'),
+  expressionless('expressionless'),
+  persevering('persevering'),
+  relived('relived'),
+  tired('tired'),
   workout('workout'),
   statistic('statistic'),
   notes('notes'),
@@ -19,6 +24,8 @@ enum AppIcons {
 
   String get _png => 'assets/images/$path.png';
 
+  String get _pngEmoji => 'assets/emotions/$path.png';
+
   String get _jpg => 'assets/icons/$path.jpg';
 
   Widget svgPicture({
@@ -34,6 +41,8 @@ enum AppIcons {
       );
 
   Widget get pngPicture => Image.asset(_png);
+
+  Widget get pngEmoji => Image.asset(_pngEmoji);
 
   Widget get jpgPicture => Image.asset(_jpg);
 }

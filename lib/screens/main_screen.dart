@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/l10n.dart';
 import '../utils/assets.dart';
 import '../utils/theme/theme.dart';
+import 'workout_screen/workout.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,7 +15,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int selectedPage = 0;
   List<Widget> pages = [
-    const Center(child: Text('first screen')),
+    const Workout(),
     const Center(child: Text('second screen')),
     const Center(child: Text('third screen')),
     const Center(child: Text('fourth screen')),

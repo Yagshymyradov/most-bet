@@ -23,6 +23,10 @@
   "statistic": "Statistic",
   "notes": "Notes",
   "posts": "Posts",
+  "emotions": "Emotions",
+  "stress": "Stress",
+  "fatigue": "Fatigue",
+  "intensity": "Intensity",
 
 
   "januaryShort": "Jan.",
@@ -36,5 +40,24 @@
   "septemberShort": "Sep.",
   "octoberShort": "Oct.",
   "novemberShort": "Nov.",
-  "decemberShort": "Dec."
+  "decemberShort": "Dec.",
+
+
+  "evaluate": "{rate}/10",
+  "@evaluate":{
+    "placeholders": {
+      "rate": {
+        "type": "int"
+      }
+    }
+  },
+
+  "min": "{minValue} min",
+  "@min": {
+    "placeholders": {
+      "minValue": {
+        "type": "int"
+      }
+    }
+  }
 }

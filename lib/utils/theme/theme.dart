@@ -29,6 +29,9 @@ class AppTheme {
         ),
       ),
     ),
+    dividerTheme: const DividerThemeData(
+      color: AppColors.primaryColor,
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
       selectedItemColor: AppColors.primaryColor,
@@ -38,6 +41,10 @@ class AppTheme {
         fontWeight: FontWeight.w400,
         fontSize: 34,
       ),
+      titleMedium: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 22,
+      ),
       titleSmall: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 20,
@@ -46,6 +53,11 @@ class AppTheme {
       headlineMedium: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 15,
+      ),
+      bodyMedium: TextStyle(
+        color: AppColors.textSecondaryColor,
+        fontWeight: FontWeight.w400,
+        fontSize: 12,
       ),
     ),
   );
