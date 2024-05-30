@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../components/small_buttons.dart';
 import '../../../data/auth_model.dart';
 import '../../../l10n/l10n.dart';
 import '../../../provider.dart';
@@ -42,13 +43,13 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
 
     widget.authModel.workoutTypes = selectedTypes;
 
-    try{
+    try {
       await authController.onSignedIn(widget.authModel);
-    } catch(e){
+    } catch (e) {
       //ignore
     }
 
-    if(selectedTypes.isNotEmpty){
+    if (selectedTypes.isNotEmpty) {
       widget.onNextButtonTap();
     }
   }
@@ -79,27 +80,10 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
             spacing: 8,
             children: WorkoutTypes.values
                 .mapIndexed(
-                  (e, i) => InkWell(
-                    borderRadius: BorderRadius.circular(23),
+                  (e, i) => SmallButton(
+                    title: e.asValue(context),
                     onTap: () => onWorkoutTypesTap(e),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: e.backgroundColor(selectedTypes.contains(e)),
-                        borderRadius: BorderRadius.circular(23),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 22,
-                          vertical: 8,
-                        ),
-                        child: Text(
-                          e.asValue(context),
-                          style: textTheme.headlineMedium?.copyWith(
-                            color: AppColors.whiteColor,
-                          ),
-                        ),
-                      ),
-                    ),
+                    backgroundColor: e.backgroundColor(selectedTypes.contains(e)),
                   ),
                 )
                 .toList(growable: false),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../components/modal_bottom_sheet.dart';
 import '../../components/profile_image.dart';
 import '../../components/workout_history.dart';
 import '../../l10n/l10n.dart';
 import '../../provider.dart';
 import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
+import 'profile.dart';
 
 class Workout extends ConsumerWidget {
   const Workout({super.key});
@@ -25,10 +27,14 @@ class Workout extends ConsumerWidget {
             children: [
               Align(
                 alignment: Alignment.centerRight,
-                child: ProfileImage(
-                  width: 44,
-                  height: 44,
-                  image: authState?.photo?.asImage ?? const SizedBox(),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(40),
+                  onTap: () => modalBottomSheet(context, const Profile()),
+                  child: ProfileImage(
+                    width: 44,
+                    height: 44,
+                    image: authState?.photo?.asImage ?? const SizedBox(),
+                  ),
                 ),
               ),
               Text(l10n.workout, style: textTheme.titleLarge),

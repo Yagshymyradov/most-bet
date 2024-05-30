@@ -15,7 +15,7 @@ dependencies:
 
 
   cupertino_icons: ^1.0.6
-  flutter_svg: ^2.0.10+1
+  flutter_svg: ^2.0.9
 
   intl: ^0.18.1
 
@@ -24,12 +24,16 @@ dependencies:
   riverpod: ^2.5.1
   flutter_riverpod: ^2.5.1
 
+  app_review: ^2.1.2+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^3.0.0
 
+dependency_overrides:
+  package_info_plus: 8.0.0
 
 flutter:
 

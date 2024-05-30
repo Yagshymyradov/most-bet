@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum AppIcons {
+  share('share'),
+  recent('recent'),
+  star('star'),
+  file('file'),
+  pen('pen'),
   blush('blush'),
   expressionless('expressionless'),
   persevering('persevering'),

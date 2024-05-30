@@ -69,5 +69,6 @@ class AppColors {
   static const whiteColor = Colors.white;
   static const textSecondaryColor = Color.fromRGBO(174, 174, 174, 1);
   static const primaryColor = Color.fromRGBO(238, 89, 22, 1);
+  static const darkColor = Color.fromRGBO(60, 60, 67, 1);
   static const blackColor = Colors.black;
 }

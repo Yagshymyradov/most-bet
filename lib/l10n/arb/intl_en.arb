@@ -27,6 +27,11 @@
   "stress": "Stress",
   "fatigue": "Fatigue",
   "intensity": "Intensity",
+  "shareApp": "Share app",
+  "rateApp": "Rate app",
+  "usageProfile": "Usage profile",
+  "resentProgress": "Resent progress",
+  "profile": "Profile",
 
 
   "januaryShort": "Jan.",
