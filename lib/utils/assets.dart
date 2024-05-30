@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum AppIcons {
+  workout('workout'),
+  statistic('statistic'),
+  notes('notes'),
+  posts('posts'),
   boy('boy'),
   girl('girl'),
   dog('dog'),

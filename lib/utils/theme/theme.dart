@@ -29,6 +29,10 @@ class AppTheme {
         ),
       ),
     ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: AppColors.primaryColor,
+    ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(
         fontWeight: FontWeight.w400,
