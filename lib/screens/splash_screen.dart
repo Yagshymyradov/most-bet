@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/linear_percent_indicator.dart';
+import '../provider.dart';
 import '../utils/assets.dart';
 import '../utils/navigation.dart';
 import '../utils/theme/theme.dart';
+import 'main_screen.dart';
 import 'on_boarding_screen/on_boarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +24,13 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   double percent = 0;
 
   void replaceWithRootScreen() {
-    replaceRootScreen(context, const OnBoardingScreen());
+    final scope = ProviderScope.containerOf(context, listen: false);
+    final authState = scope.read(authControllerProvider);
+    if(authState == null) {
+      replaceRootScreen(context, const OnBoardingScreen());
+    }else{
+      replaceRootScreen(context, const MainScreen());
+    }
   }
 
   @override

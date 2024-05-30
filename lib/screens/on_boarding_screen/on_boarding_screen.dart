@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/auth_model.dart';
 import '../../utils/navigation.dart';
 import '../../utils/theme/theme.dart';
 import '../main_screen.dart';
@@ -15,6 +16,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  final authModel = AuthModel();
   final controller = PageController();
   int selectedPage = 0;
 
@@ -68,9 +70,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   });
                 },
                 children: [
-                  NameAgeField(onNextButtonTap: onNextButtonTap),
-                  ChooseProfilePhoto(onNextButtonTap: onNextButtonTap),
-                  ChooseWorkoutType(onNextButtonTap: onNextButtonTap),
+                  NameAgeField(
+                    onNextButtonTap: onNextButtonTap,
+                    authModel: authModel,
+                  ),
+                  ChooseProfilePhoto(
+                    onNextButtonTap: onNextButtonTap,
+                    authModel: authModel,
+                  ),
+                  ChooseWorkoutType(
+                    onNextButtonTap: onNextButtonTap,
+                    authModel: authModel,
+                  ),
                 ],
               ),
             ),

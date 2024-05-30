@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/profile_image.dart';
+import '../../../data/auth_model.dart';
 import '../../../l10n/l10n.dart';
 import '../../../utils/enums.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
 
 class ChooseProfilePhoto extends StatefulWidget {
+  final AuthModel authModel;
   final VoidCallback onNextButtonTap;
 
   const ChooseProfilePhoto({
     super.key,
     required this.onNextButtonTap,
+    required this.authModel,
   });
 
   @override
@@ -26,6 +29,14 @@ class _ChooseProfilePhotoState extends State<ChooseProfilePhoto> {
     setState(() {
       //no-op
     });
+  }
+
+  void whenTapNextButton(){
+    widget.authModel.photo = profileImage;
+
+    if(widget.authModel.photo != null) {
+      widget.onNextButtonTap();
+    }
   }
 
   @override
@@ -68,7 +79,7 @@ class _ChooseProfilePhotoState extends State<ChooseProfilePhoto> {
           ),
           const Spacer(),
           ElevatedButton(
-            onPressed: profileImage == null ? null : widget.onNextButtonTap,
+            onPressed: whenTapNextButton,
             style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(
                 profileImage != null //

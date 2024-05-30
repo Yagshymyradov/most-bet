@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../components/profile_image.dart';
 import '../../components/workout_history.dart';
 import '../../l10n/l10n.dart';
-import '../../utils/assets.dart';
+import '../../provider.dart';
 import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
 
-class Workout extends StatelessWidget {
+class Workout extends ConsumerWidget {
   const Workout({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authControllerProvider);
     final textTheme = context.textTheme;
     final l10n = context.l10n;
 
@@ -24,9 +26,9 @@ class Workout extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: ProfileImage(
-                  image: AppIcons.dog.pngPicture,
                   width: 44,
                   height: 44,
+                  image: authState?.photo?.asImage ?? const SizedBox(),
                 ),
               ),
               Text(l10n.workout, style: textTheme.titleLarge),

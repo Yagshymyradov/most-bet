@@ -25,6 +25,10 @@ enum ProfilePhoto {
         ? AppColors.primaryColor
         : AppColors.primaryColor.withOpacity(0.5);
   }
+
+  String toJson()=> name;
+
+  static ProfilePhoto fromJson(String json)=> values.byName(json);
 }
 
 enum WorkoutTypes {
@@ -64,4 +68,8 @@ enum WorkoutTypes {
         ? AppColors.primaryColor
         : AppColors.primaryColor.withOpacity(0.5);
   }
+
+  String toJson()=> name;
+
+  static WorkoutTypes fromJson(String json)=> values.byName(json);
 }

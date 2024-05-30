@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../data/auth_model.dart';
 import '../../../l10n/l10n.dart';
+import '../../../provider.dart';
 import '../../../utils/enums.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
 
 class ChooseWorkoutType extends StatefulWidget {
+  final AuthModel authModel;
   final VoidCallback onNextButtonTap;
 
   const ChooseWorkoutType({
     super.key,
+    required this.authModel,
     required this.onNextButtonTap,
   });
 
@@ -29,6 +34,23 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
     setState(() {
       //no-op
     });
+  }
+
+  Future<void> whenTapNextButton() async {
+    final scope = ProviderScope.containerOf(context, listen: false);
+    final authController = scope.read(authControllerProvider.notifier);
+
+    widget.authModel.workoutTypes = selectedTypes;
+
+    try{
+      await authController.onSignedIn(widget.authModel);
+    } catch(e){
+      //ignore
+    }
+
+    if(selectedTypes.isNotEmpty){
+      widget.onNextButtonTap();
+    }
   }
 
   @override
@@ -84,7 +106,7 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
           ),
           const Spacer(),
           ElevatedButton(
-            onPressed: selectedTypes.isEmpty ? null : widget.onNextButtonTap,
+            onPressed: whenTapNextButton,
             style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(
                 selectedTypes.isNotEmpty //

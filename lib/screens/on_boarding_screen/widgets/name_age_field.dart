@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/field_text.dart';
+import '../../../data/auth_model.dart';
 import '../../../l10n/l10n.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
 
 class NameAgeField extends StatefulWidget {
+  final AuthModel authModel;
   final VoidCallback onNextButtonTap;
 
-  const NameAgeField({super.key, required this.onNextButtonTap});
+  const NameAgeField({
+    super.key,
+    required this.onNextButtonTap,
+    required this.authModel,
+  });
 
   @override
   State<NameAgeField> createState() => _NameAgeFieldState();
@@ -17,6 +23,16 @@ class NameAgeField extends StatefulWidget {
 class _NameAgeFieldState extends State<NameAgeField> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
+
+  void whenTapNextButton() {
+    widget.authModel.name = nameController.text;
+    widget.authModel.age = ageController.text;
+
+    final fieldsIsNotEmpty = widget.authModel.name != null && widget.authModel.age != null;
+    if (fieldsIsNotEmpty) {
+      widget.onNextButtonTap();
+    }
+  }
 
   void updateUi() {
     setState(() {
@@ -65,7 +81,7 @@ class _NameAgeFieldState extends State<NameAgeField> {
           ),
           const Spacer(),
           ElevatedButton(
-            onPressed: fieldsIsNotEmpty ? widget.onNextButtonTap : null,
+            onPressed: whenTapNextButton,
             style: ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(
                 fieldsIsNotEmpty ? null : AppColors.primaryColor.withOpacity(0.5),
