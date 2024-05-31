@@ -41,6 +41,13 @@ class _NameAgeFieldState extends State<NameAgeField> {
   }
 
   @override
+  void dispose() {
+    nameController.dispose();
+    ageController.dispose();
+
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     final fieldsIsNotEmpty = nameController.text.isNotEmpty && ageController.text.isNotEmpty;
     final textTheme = context.textTheme;

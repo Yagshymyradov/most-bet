@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/enums.dart';
+import '../data/workout_history_model.dart';
 
 class ChooseEmotion extends StatelessWidget {
   final VoidCallback onTap;

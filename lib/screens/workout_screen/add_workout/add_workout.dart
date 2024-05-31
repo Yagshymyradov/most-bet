@@ -1,25 +1,28 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../components/chooseEmotion.dart';
 import '../../../components/field_text.dart';
 import '../../../components/rate_slider.dart';
+import '../../../data/workout_history_controller.dart';
+import '../../../data/workout_history_model.dart';
 import '../../../l10n/l10n.dart';
 import '../../../utils/assets.dart';
-import '../../../utils/enums.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
 
-class AddWorkout extends StatefulWidget {
+class AddWorkout extends ConsumerStatefulWidget {
   const AddWorkout({super.key});
 
   @override
-  State<AddWorkout> createState() => _AddWorkoutState();
+  ConsumerState<AddWorkout> createState() => _AddWorkoutState();
 }
 
-class _AddWorkoutState extends State<AddWorkout> {
-  final workoutController = TextEditingController();
-  final dateController = TextEditingController();
-  final timeController = TextEditingController();
+class _AddWorkoutState extends ConsumerState<AddWorkout> {
+  final titleController = TextEditingController();
+  final dateTimeController = TextEditingController();
+  final durationController = TextEditingController();
+  Emotions? selectedEmotion;
   double fatigueValue = 0;
   double stressValue = 0;
   double intensityValue = 0;
@@ -43,6 +46,39 @@ class _AddWorkoutState extends State<AddWorkout> {
   void onIntensityChanged(double value) {
     intensityValue = value;
     updateUi();
+  }
+
+  void onChooseEmotion(Emotions emotion) {
+    selectedEmotion = emotion;
+    updateUi();
+  }
+
+  void addButtonTap() {
+    final history = ref.read(workoutHistoryProvider.notifier);
+    if(selectedEmotion == null) return;
+
+    history.repo?.addToWorkoutList(
+      WorkoutHistory(
+        title: titleController.text,
+        dateTime: dateTimeController.text,
+        duration: durationController.text,
+        emotion: selectedEmotion ?? Emotions.blush,
+        stress: stressValue,
+        fatigue: fatigueValue,
+        intensity: intensityValue,
+      ),
+    );
+
+    Navigator.pop<bool>(context);
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    dateTimeController.dispose();
+    durationController.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -69,23 +105,26 @@ class _AddWorkoutState extends State<AddWorkout> {
                       color: AppColors.blackColor,
                     ),
                   ),
-                  AppIcons.add.svgPicture(),
+                  IconButton(
+                    onPressed: addButtonTap,
+                    icon: AppIcons.add.svgPicture(),
+                  ),
                 ],
               ),
               const SizedBox(height: 21),
               FieldText(
                 hintText: l10n.typeOfWorkout,
-                controller: workoutController,
+                controller: titleController,
               ),
               const SizedBox(height: 16),
               FieldText(
                 hintText: l10n.chooseDate,
-                controller: dateController,
+                controller: dateTimeController,
               ),
               const SizedBox(height: 16),
               FieldText(
                 hintText: l10n.trainingTime,
-                controller: timeController,
+                controller: durationController,
               ),
               const SizedBox(height: 16),
             ],
@@ -118,10 +157,10 @@ class _AddWorkoutState extends State<AddWorkout> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: Emotions.values
                 .map(
-                  (e) => SizedBox(
-                    width: 28,
-                    height: 34,
-                    child: e.asEmotion,
+                  (e) => ChooseEmotion(
+                    onTap: ()=> onChooseEmotion(e),
+                    emotions: e,
+                    backgroundColor: selectedEmotion == e ? AppColors.primaryColor : null,
                   ),
                 )
                 .toList(growable: false),

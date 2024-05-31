@@ -80,6 +80,7 @@ class AppColors {
   static const textSecondaryColor = Color.fromRGBO(174, 174, 174, 1);
   static const greyColor = Color.fromRGBO(128, 133, 142, 1);
   static const primaryColor = Color.fromRGBO(238, 89, 22, 1);
+  static const redColor = Color.fromRGBO(241, 17, 17, 1);
   static const darkColor = Color.fromRGBO(60, 60, 67, 1);
   static const blackColor = Colors.black;
 }

@@ -6,7 +6,24 @@ import '../utils/extensions.dart';
 import '../utils/theme/theme.dart';
 
 class WorkoutHistory extends StatelessWidget {
-  const WorkoutHistory({super.key});
+  final String title;
+  final String dateTime;
+  final String duration;
+  final Widget emotion;
+  final int stress;
+  final int fatigue;
+  final int intensity;
+
+  const WorkoutHistory({
+    super.key,
+    required this.title,
+    required this.dateTime,
+    required this.duration,
+    required this.emotion,
+    required this.stress,
+    required this.fatigue,
+    required this.intensity,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +39,18 @@ class WorkoutHistory extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: l10n.stretching,
+                    text: title,
                     style: textTheme.titleMedium,
                   ),
                   TextSpan(
-                    text: '\n22.01.2024',
+                    text: '\n$dateTime',
                     style: textTheme.bodyMedium,
                   ),
                 ],
               ),
             ),
             Text(
-              l10n.min(30),
+              l10n.min(duration),
               style: textTheme.titleLarge?.copyWith(
                 color: AppColors.primaryColor,
               ),
@@ -54,7 +71,7 @@ class WorkoutHistory extends StatelessWidget {
                 SizedBox(
                   width: 20,
                   height: 25,
-                  child: AppIcons.blush.pngEmoji,
+                  child: emotion,
                 ),
               ],
             ),
@@ -68,7 +85,7 @@ class WorkoutHistory extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  l10n.evaluate(5),
+                  l10n.evaluate(stress),
                   style: textTheme.titleSmall?.copyWith(
                     color: AppColors.blackColor,
                   ),
@@ -85,7 +102,7 @@ class WorkoutHistory extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  l10n.evaluate(6),
+                  l10n.evaluate(fatigue),
                   style: textTheme.titleSmall?.copyWith(
                     color: AppColors.blackColor,
                   ),
@@ -102,7 +119,7 @@ class WorkoutHistory extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  l10n.evaluate(7),
+                  l10n.evaluate(intensity),
                   style: textTheme.titleSmall?.copyWith(
                     color: AppColors.blackColor,
                   ),

@@ -40,6 +40,8 @@
   "stressDescription": "Stress (1 - I’m okay, 10 - I’m feeling very stressed)",
   "intensityDescription": "Intensity (1 - Okay, 10 - It was very hard)",
   "ten": "10",
+  "add": "Add",
+  "addFirstWorkout": "Add your first workout",
 
 
   "januaryShort": "Jan.",
@@ -69,7 +71,7 @@
   "@min": {
     "placeholders": {
       "minValue": {
-        "type": "int"
+        "type": "String"
       }
     }
   }

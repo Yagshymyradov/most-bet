@@ -74,25 +74,3 @@ enum WorkoutTypes {
   static WorkoutTypes fromJson(String json)=> values.byName(json);
 }
 
-enum Emotions{
-  relieved,
-  blush,
-  expressionless,
-  tired,
-  persevering;
-
-  Widget get asEmotion{
-    switch(this){
-      case Emotions.relieved:
-        return AppIcons.relieved.pngEmoji;
-      case Emotions.blush:
-        return AppIcons.blush.pngEmoji;
-      case Emotions.expressionless:
-        return AppIcons.expressionless.pngEmoji;
-      case Emotions.tired:
-        return AppIcons.tired.pngEmoji;
-      case Emotions.persevering:
-        return AppIcons.persevering.pngEmoji;
-    }
-  }
-}
