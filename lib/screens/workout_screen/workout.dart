@@ -8,6 +8,7 @@ import '../../l10n/l10n.dart';
 import '../../provider.dart';
 import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
+import 'add_workout/add_workout.dart';
 import 'profile.dart';
 
 class Workout extends ConsumerWidget {
@@ -51,13 +52,13 @@ class Workout extends ConsumerWidget {
             bottom: 18,
             right: 22,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => modalBottomSheet(context, const AddWorkout()),
               style: const ButtonStyle(
                 maximumSize: MaterialStatePropertyAll(Size(139, 36)),
                 minimumSize: MaterialStatePropertyAll(Size(129, 36)),
               ),
               child: Text(
-                'Add workout',
+                l10n.addWorkout,
                 style: textTheme.headlineMedium?.copyWith(color: AppColors.whiteColor),
               ),
             ),

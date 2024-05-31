@@ -32,6 +32,14 @@
   "usageProfile": "Usage profile",
   "resentProgress": "Resent progress",
   "profile": "Profile",
+  "addWorkout": "Add workout",
+  "typeOfWorkout": "Type of workout",
+  "chooseDate": "Choose date",
+  "trainingTime": "Training time",
+  "fatigueDescription": "Fatigue (1 - I’m okay, 10 - I’m exhausted)",
+  "stressDescription": "Stress (1 - I’m okay, 10 - I’m feeling very stressed)",
+  "intensityDescription": "Intensity (1 - Okay, 10 - It was very hard)",
+  "ten": "10",
 
 
   "januaryShort": "Jan.",

@@ -40,7 +40,7 @@ class FieldText extends StatelessWidget {
       maxLines: maxLines,
       onChanged: onChanged,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(20),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         hintText: hintText,
       ),
     );
