@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/chooseEmotion.dart';
 import '../../../components/field_text.dart';
 import '../../../components/rate_slider.dart';
 import '../../../l10n/l10n.dart';
@@ -23,7 +23,6 @@ class _AddWorkoutState extends State<AddWorkout> {
   double fatigueValue = 0;
   double stressValue = 0;
   double intensityValue = 0;
-  Emotions? selectedEmotion;
 
   void updateUi() {
     setState(() {
@@ -43,11 +42,6 @@ class _AddWorkoutState extends State<AddWorkout> {
 
   void onIntensityChanged(double value) {
     intensityValue = value;
-    updateUi();
-  }
-
-  void onChooseEmotion(Emotions emotion) {
-    selectedEmotion = emotion;
     updateUi();
   }
 
@@ -124,10 +118,10 @@ class _AddWorkoutState extends State<AddWorkout> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: Emotions.values
                 .map(
-                  (e) => ChooseEmotion(
-                    onTap: ()=> onChooseEmotion(e),
-                    backgroundColor: selectedEmotion == e ? AppColors.primaryColor : null,
-                    emotions: e,
+                  (e) => SizedBox(
+                    width: 28,
+                    height: 34,
+                    child: e.asEmotion,
                   ),
                 )
                 .toList(growable: false),
