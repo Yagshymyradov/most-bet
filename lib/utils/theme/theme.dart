@@ -9,6 +9,11 @@ class AppTheme {
     fontFamily: 'Sf-Pro-Regular',
     primaryColor: AppColors.primaryColor,
     inputDecorationTheme: InputDecorationTheme(
+      hintStyle: const TextStyle(
+        fontSize: 17,
+        fontWeight: FontWeight.w400,
+        color: AppColors.greyColor,
+      ),
       border: OutlineInputBorder(
         borderSide: const BorderSide(color: AppColors.textSecondaryColor),
         borderRadius: BorderRadius.circular(30),
@@ -54,6 +59,11 @@ class AppTheme {
         fontWeight: FontWeight.w400,
         fontSize: 15,
       ),
+      bodyLarge: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 17,
+        color: AppColors.greyColor,
+      ),
       bodyMedium: TextStyle(
         color: AppColors.textSecondaryColor,
         fontWeight: FontWeight.w400,
@@ -68,6 +78,7 @@ class AppColors {
 
   static const whiteColor = Colors.white;
   static const textSecondaryColor = Color.fromRGBO(174, 174, 174, 1);
+  static const greyColor = Color.fromRGBO(128, 133, 142, 1);
   static const primaryColor = Color.fromRGBO(238, 89, 22, 1);
   static const darkColor = Color.fromRGBO(60, 60, 67, 1);
   static const blackColor = Colors.black;
