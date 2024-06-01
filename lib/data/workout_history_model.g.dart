@@ -6,17 +6,17 @@ part of 'workout_history_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class WorkoutHistoryAdapter extends TypeAdapter<WorkoutHistory> {
+class WorkoutHistoryModelAdapter extends TypeAdapter<WorkoutHistoryModel> {
   @override
   final int typeId = 1;
 
   @override
-  WorkoutHistory read(BinaryReader reader) {
+  WorkoutHistoryModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return WorkoutHistory(
+    return WorkoutHistoryModel(
       title: fields[1] as String,
       dateTime: fields[2] as String,
       duration: fields[3] as String,
@@ -28,7 +28,7 @@ class WorkoutHistoryAdapter extends TypeAdapter<WorkoutHistory> {
   }
 
   @override
-  void write(BinaryWriter writer, WorkoutHistory obj) {
+  void write(BinaryWriter writer, WorkoutHistoryModel obj) {
     writer
       ..writeByte(8)
       ..writeByte(0)
@@ -55,7 +55,7 @@ class WorkoutHistoryAdapter extends TypeAdapter<WorkoutHistory> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is WorkoutHistoryAdapter &&
+      other is WorkoutHistoryModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

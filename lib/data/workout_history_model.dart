@@ -7,7 +7,7 @@ import '../utils/assets.dart';
 part 'workout_history_model.g.dart';
 
 @HiveType(typeId: 1)
-class WorkoutHistory extends HiveObject {
+class WorkoutHistoryModel extends HiveObject {
   @HiveField(0)
   final String id;
   @HiveField(1)
@@ -25,7 +25,7 @@ class WorkoutHistory extends HiveObject {
   @HiveField(7)
   final double intensity;
 
-  WorkoutHistory({
+  WorkoutHistoryModel({
     required this.title,
     required this.dateTime,
     required this.duration,
@@ -35,7 +35,7 @@ class WorkoutHistory extends HiveObject {
     required this.intensity,
   }) : id = const Uuid().v4();
 
-  WorkoutHistory copyWith({
+  WorkoutHistoryModel copyWith({
     String? id,
     String? title,
     String? dateTime,
@@ -45,7 +45,7 @@ class WorkoutHistory extends HiveObject {
     double? fatigue,
     double? intensity,
   }) {
-      return WorkoutHistory(title: title ?? this.title,
+      return WorkoutHistoryModel(title: title ?? this.title,
       dateTime: dateTime ?? this.dateTime,
       duration: duration ?? this.duration,
       emotion: emotion ?? this.emotion,

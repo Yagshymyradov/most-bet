@@ -15,10 +15,10 @@ Future<void> main() async {
 
   await Hive.initFlutter();
 
-  Hive.registerAdapter(WorkoutHistoryAdapter());
+  Hive.registerAdapter(WorkoutHistoryModelAdapter());
   Hive.registerAdapter(EmotionsAdapter());
 
-  await Hive.openBox<WorkoutHistory>('workout_history');
+  await Hive.openBox<WorkoutHistoryModel>('workout_history');
 
   final sharedPrefs = await SharedPreferences.getInstance();
 

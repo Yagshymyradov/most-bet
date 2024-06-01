@@ -7,11 +7,11 @@ final workoutHistoryRepoProvider = Provider<WorkoutHistoryRepo>(
       (ref) => WorkoutHistoryRepo(),
 );
 
-final workoutHistoryProvider = StateNotifierProvider<WorkoutHistoryController, List<WorkoutHistory>?>(
+final workoutHistoryProvider = StateNotifierProvider<WorkoutHistoryController, List<WorkoutHistoryModel>?>(
   WorkoutHistoryController.new,
 );
 
-class WorkoutHistoryController extends StateNotifier<List<WorkoutHistory>?> {
+class WorkoutHistoryController extends StateNotifier<List<WorkoutHistoryModel>?> {
   WorkoutHistoryRepo? repo;
 
   final StateNotifierProviderRef<dynamic, dynamic> ref;
@@ -25,12 +25,12 @@ class WorkoutHistoryController extends StateNotifier<List<WorkoutHistory>?> {
     state = repo!.getWorkoutList();
   }
 
-  void addWorkout(WorkoutHistory workout) {
+  void addWorkout(WorkoutHistoryModel workout) {
     state = repo!.addToWorkoutList(workout);
   }
 
-  void updateWorkout(WorkoutHistory workout) {
-    state = repo!.updateWorkoutList(workout);
+  void updateWorkout(int index, WorkoutHistoryModel workout) {
+    state = repo!.updateWorkoutList(index, workout);
   }
 
   void removeFavorite(String id) {

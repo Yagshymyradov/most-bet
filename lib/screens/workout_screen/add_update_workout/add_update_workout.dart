@@ -11,14 +11,21 @@ import '../../../utils/assets.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
 
-class AddWorkout extends ConsumerStatefulWidget {
-  const AddWorkout({super.key});
+class AddUpdateWorkout extends ConsumerStatefulWidget {
+  final WorkoutHistoryModel? workoutHistory;
+  final int? index;
+
+  const AddUpdateWorkout({
+    super.key,
+    this.workoutHistory,
+    this.index,
+  });
 
   @override
-  ConsumerState<AddWorkout> createState() => _AddWorkoutState();
+  ConsumerState<AddUpdateWorkout> createState() => _AddWorkoutState();
 }
 
-class _AddWorkoutState extends ConsumerState<AddWorkout> {
+class _AddWorkoutState extends ConsumerState<AddUpdateWorkout> {
   final titleController = TextEditingController();
   final dateTimeController = TextEditingController();
   final durationController = TextEditingController();
@@ -55,10 +62,10 @@ class _AddWorkoutState extends ConsumerState<AddWorkout> {
 
   void addButtonTap() {
     final history = ref.read(workoutHistoryProvider.notifier);
-    if(selectedEmotion == null) return;
+    if (selectedEmotion == null) return;
 
     history.repo?.addToWorkoutList(
-      WorkoutHistory(
+      WorkoutHistoryModel(
         title: titleController.text,
         dateTime: dateTimeController.text,
         duration: durationController.text,
@@ -69,7 +76,48 @@ class _AddWorkoutState extends ConsumerState<AddWorkout> {
       ),
     );
 
-    Navigator.pop<bool>(context);
+    Navigator.pop(context);
+  }
+
+  @override
+  void initState() {
+    initialValues();
+
+    super.initState();
+  }
+
+  void initialValues(){
+    final workout = widget.workoutHistory;
+    if(workout == null) return;
+
+    titleController.text = workout.title;
+    dateTimeController.text = workout.dateTime;
+    durationController.text = workout.duration;
+    selectedEmotion = workout.emotion;
+    stressValue = workout.stress;
+    fatigueValue = workout.fatigue;
+    intensityValue = workout.intensity;
+  }
+
+  void onEditButtonTap(){
+    if(widget.index == null) return;
+
+    final history = ref.read(workoutHistoryProvider.notifier);
+    history.repo?.updateWorkoutList(
+      widget.index!, WorkoutHistoryModel(
+        title: titleController.text,
+        dateTime: dateTimeController.text,
+        duration: durationController.text,
+        emotion: selectedEmotion ?? Emotions.blush,
+        stress: stressValue,
+        fatigue: fatigueValue,
+        intensity: intensityValue,
+      ),
+    );
+    setState(() {
+
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -97,15 +145,21 @@ class _AddWorkoutState extends ConsumerState<AddWorkout> {
               children: [
                 const SizedBox(width: 40),
                 Text(
-                  l10n.addWorkout,
+                  widget.workoutHistory == null ? l10n.addWorkout : l10n.editWorkout,
                   style: textTheme.headlineMedium?.copyWith(
                     color: AppColors.blackColor,
                   ),
                 ),
-                IconButton(
-                  onPressed: addButtonTap,
-                  icon: AppIcons.add.svgPicture(),
-                ),
+                if (widget.workoutHistory == null)
+                  IconButton(
+                    onPressed: addButtonTap,
+                    icon: AppIcons.add.svgPicture(),
+                  )
+                else
+                  IconButton(
+                    onPressed: onEditButtonTap,
+                    icon: AppIcons.tick.svgPicture(),
+                  ),
               ],
             ),
             const SizedBox(height: 21),
@@ -154,7 +208,7 @@ class _AddWorkoutState extends ConsumerState<AddWorkout> {
             children: Emotions.values
                 .map(
                   (e) => ChooseEmotion(
-                    onTap: ()=> onChooseEmotion(e),
+                    onTap: () => onChooseEmotion(e),
                     emotions: e,
                     backgroundColor: selectedEmotion == e ? AppColors.primaryColor : null,
                   ),

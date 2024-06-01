@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../components/cell_with_ratings.dart';
-import '../../../components/modal_bottom_sheet.dart';
 import '../../../data/workout_history_controller.dart';
 import '../../../data/workout_history_model.dart';
 import '../../../l10n/l10n.dart';
 import '../../../utils/assets.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
-import '../add_workout/add_workout.dart';
 
 class WorkoutDetail extends StatelessWidget {
-  final WorkoutHistory workout;
+  final WorkoutHistoryModel workout;
+  final VoidCallback onEditWorkout;
 
   const WorkoutDetail({
     super.key,
     required this.workout,
+    required this.onEditWorkout,
   });
 
   void onDeleteButtonTap(BuildContext context) {
@@ -44,10 +44,7 @@ class WorkoutDetail extends StatelessWidget {
                 icon: AppIcons.delete.svgPicture(),
               ),
               IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  modalBottomSheet(context, const AddWorkout());
-                },
+                onPressed: onEditWorkout,
                 icon: AppIcons.pen.svgPicture(),
               ),
             ],

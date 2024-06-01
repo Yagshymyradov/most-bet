@@ -6,11 +6,12 @@ import '../../components/modal_bottom_sheet.dart';
 import '../../components/profile_image.dart';
 import '../../components/workout_history.dart';
 import '../../data/workout_history_controller.dart';
+import '../../data/workout_history_model.dart';
 import '../../l10n/l10n.dart';
 import '../../provider.dart';
 import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
-import 'add_workout/add_workout.dart';
+import 'add_update_workout/add_update_workout.dart';
 import 'profile.dart';
 import 'workout_detail/workout_detail.dart';
 
@@ -29,7 +30,19 @@ class _WorkoutState extends ConsumerState<Workout> {
   }
 
   void addButtonTap() {
-    modalBottomSheet(context, const AddWorkout()).whenComplete(updateUi);
+    modalBottomSheet(
+      context,
+      const AddUpdateWorkout(),
+    ).whenComplete(updateUi);
+  }
+
+  void onEditWorkout(WorkoutHistoryModel workout, int index) {
+    Navigator.pop(context);
+
+    modalBottomSheet(
+      context,
+      AddUpdateWorkout(workoutHistory: workout, index: index),
+    ).whenComplete(updateUi);
   }
 
   @override
@@ -60,11 +73,14 @@ class _WorkoutState extends ConsumerState<Workout> {
               Text(l10n.workout, style: textTheme.titleLarge),
               const SizedBox(height: 20),
               ...workout
-                      ?.map(
-                        (e) => InkWell(
+                      ?.mapIndexed(
+                        (e, i) => InkWell(
                           onTap: () => modalBottomSheet(
                             context,
-                            WorkoutDetail(workout: e),
+                            WorkoutDetail(
+                              workout: e,
+                              onEditWorkout: ()=> onEditWorkout(e, i),
+                            ),
                           ).whenComplete(updateUi),
                           child: WorkoutHistory(
                             title: e.title,
