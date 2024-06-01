@@ -4,6 +4,8 @@ import '../utils/theme/theme.dart';
 
 Future<void> modalBottomSheet(BuildContext context, Widget content) {
   return showModalBottomSheet<void>(
+    useRootNavigator: true,
+    isScrollControlled: true,
     useSafeArea: true,
     backgroundColor: AppColors.whiteColor,
     shape: const RoundedRectangleBorder(
@@ -12,7 +14,6 @@ Future<void> modalBottomSheet(BuildContext context, Widget content) {
         topLeft: Radius.circular(10),
       ),
     ),
-    scrollControlDisabledMaxHeightRatio: 1,
     context: context,
     builder: (context) {
       return Stack(

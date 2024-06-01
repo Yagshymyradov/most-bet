@@ -87,48 +87,44 @@ class _AddWorkoutState extends ConsumerState<AddWorkout> {
     final textTheme = context.textTheme;
 
     return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 25),
+      padding: const EdgeInsets.all(16),
       children: [
-        const SizedBox(width: 22),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(width: 22),
-                  Text(
-                    l10n.addWorkout,
-                    style: textTheme.headlineMedium?.copyWith(
-                      color: AppColors.blackColor,
-                    ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(width: 40),
+                Text(
+                  l10n.addWorkout,
+                  style: textTheme.headlineMedium?.copyWith(
+                    color: AppColors.blackColor,
                   ),
-                  IconButton(
-                    onPressed: addButtonTap,
-                    icon: AppIcons.add.svgPicture(),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 21),
-              FieldText(
-                hintText: l10n.typeOfWorkout,
-                controller: titleController,
-              ),
-              const SizedBox(height: 16),
-              FieldText(
-                hintText: l10n.chooseDate,
-                controller: dateTimeController,
-              ),
-              const SizedBox(height: 16),
-              FieldText(
-                hintText: l10n.trainingTime,
-                controller: durationController,
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
+                ),
+                IconButton(
+                  onPressed: addButtonTap,
+                  icon: AppIcons.add.svgPicture(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 21),
+            FieldText(
+              hintText: l10n.typeOfWorkout,
+              controller: titleController,
+            ),
+            const SizedBox(height: 16),
+            FieldText(
+              hintText: l10n.chooseDate,
+              controller: dateTimeController,
+            ),
+            const SizedBox(height: 16),
+            FieldText(
+              hintText: l10n.trainingTime,
+              controller: durationController,
+            ),
+            const SizedBox(height: 16),
+          ],
         ),
         RateSlider(
           title: l10n.fatigueDescription,

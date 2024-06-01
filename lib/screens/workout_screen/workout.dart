@@ -12,6 +12,7 @@ import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
 import 'add_workout/add_workout.dart';
 import 'profile.dart';
+import 'workout_detail/workout_detail.dart';
 
 class Workout extends ConsumerStatefulWidget {
   const Workout({super.key});
@@ -21,13 +22,14 @@ class Workout extends ConsumerStatefulWidget {
 }
 
 class _WorkoutState extends ConsumerState<Workout> {
+  void updateUi() {
+    setState(() {
+      //no-op
+    });
+  }
 
   void addButtonTap() {
-    modalBottomSheet(context, const AddWorkout()).whenComplete(
-      () => setState(() {
-        //no-op
-      }),
-    );
+    modalBottomSheet(context, const AddWorkout()).whenComplete(updateUi);
   }
 
   @override
@@ -59,14 +61,20 @@ class _WorkoutState extends ConsumerState<Workout> {
               const SizedBox(height: 20),
               ...workout
                       ?.map(
-                        (e) => WorkoutHistory(
-                          title: e.title,
-                          dateTime: e.dateTime,
-                          duration: e.duration,
-                          emotion: e.emotion.asEmotion,
-                          stress: e.stress.toInt(),
-                          fatigue: e.fatigue.toInt(),
-                          intensity: e.intensity.toInt(),
+                        (e) => InkWell(
+                          onTap: () => modalBottomSheet(
+                            context,
+                            WorkoutDetail(workout: e),
+                          ).whenComplete(updateUi),
+                          child: WorkoutHistory(
+                            title: e.title,
+                            dateTime: e.dateTime,
+                            duration: e.duration,
+                            emotion: e.emotion.asEmotion,
+                            stress: e.stress.toInt(),
+                            fatigue: e.fatigue.toInt(),
+                            intensity: e.intensity.toInt(),
+                          ),
                         ),
                       )
                       .toList() ??
