@@ -5,7 +5,6 @@ import '../../components/modal_bottom_sheet.dart';
 import '../../components/note_tile.dart';
 import '../../components/small_buttons.dart';
 import '../../l10n/l10n.dart';
-import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
 import 'add_notes.dart';
 import 'note_detail.dart';
@@ -20,7 +19,6 @@ class Notes extends StatefulWidget {
 class _NotesState extends State<Notes> {
   @override
   Widget build(BuildContext context) {
-    final textTheme = context.textTheme;
     final l10n = context.l10n;
     return SafeArea(
       child: Stack(

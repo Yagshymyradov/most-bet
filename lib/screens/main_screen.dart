@@ -4,6 +4,7 @@ import '../l10n/l10n.dart';
 import '../utils/assets.dart';
 import '../utils/theme/theme.dart';
 import 'notes_sceen/notes.dart';
+import 'posts_screen/posts.dart';
 import 'statistic_sreen/statistic.dart';
 import 'workout_screen/workout.dart';
 
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     const Workout(),
     const Statistic(),
     const Notes(),
-    const Center(child: Text('fourth screen')),
+    const Posts(),
   ];
 
   @override
