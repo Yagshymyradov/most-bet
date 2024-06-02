@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/l10n.dart';
 import '../utils/assets.dart';
 import '../utils/theme/theme.dart';
+import 'statistic_sreen/statistic.dart';
 import 'workout_screen/workout.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   int selectedPage = 0;
   List<Widget> pages = [
     const Workout(),
-    const Center(child: Text('second screen')),
+    const Statistic(),
     const Center(child: Text('third screen')),
     const Center(child: Text('fourth screen')),
   ];

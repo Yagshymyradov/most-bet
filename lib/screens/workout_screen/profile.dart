@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../components/opstionsCard.dart';
+import '../../components/opstions_card.dart';
 import '../../components/profile_image.dart';
 import '../../components/small_buttons.dart';
 import '../../l10n/l10n.dart';

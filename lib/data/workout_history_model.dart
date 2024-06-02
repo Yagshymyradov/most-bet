@@ -36,7 +36,6 @@ class WorkoutHistoryModel extends HiveObject {
   }) : id = const Uuid().v4();
 
   WorkoutHistoryModel copyWith({
-    String? id,
     String? title,
     String? dateTime,
     String? duration,

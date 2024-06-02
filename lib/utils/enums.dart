@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../l10n/l10n.dart';
@@ -74,3 +75,48 @@ enum WorkoutTypes {
   static WorkoutTypes fromJson(String json)=> values.byName(json);
 }
 
+enum Month{
+  january,
+  february,
+  march,
+  april,
+  may,
+  june,
+  july,
+  august,
+  september,
+  october,
+  november,
+  december;
+
+  String asValue(BuildContext context){
+    final l10n = context.l10n;
+
+    switch(this){
+      case Month.january:
+        return l10n.january;
+      case Month.february:
+        return l10n.february;
+      case Month.march:
+        return l10n.march;
+      case Month.april:
+        return l10n.april;
+      case Month.may:
+        return l10n.may;
+      case Month.june:
+        return l10n.june;
+      case Month.july:
+        return l10n.july;
+      case Month.august:
+        return l10n.august;
+      case Month.september:
+        return l10n.september;
+      case Month.october:
+        return l10n.october;
+      case Month.november:
+        return l10n.november;
+      case Month.december:
+        return l10n.december;
+    }
+  }
+}

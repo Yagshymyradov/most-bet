@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../components/app_bar_widget.dart';
 import '../../components/indicators.dart';
 import '../../components/modal_bottom_sheet.dart';
-import '../../components/profile_image.dart';
+import '../../components/small_buttons.dart';
 import '../../components/workout_history.dart';
 import '../../data/workout_history_controller.dart';
 import '../../data/workout_history_model.dart';
@@ -48,8 +49,6 @@ class _WorkoutState extends ConsumerState<Workout> {
   @override
   Widget build(BuildContext context) {
     final workout = ref.watch(workoutHistoryProvider.notifier).repo?.getWorkoutList();
-    final authState = ref.watch(authControllerProvider);
-    final textTheme = context.textTheme;
     final l10n = context.l10n;
 
     return Padding(
@@ -58,19 +57,7 @@ class _WorkoutState extends ConsumerState<Workout> {
         children: [
           ListView(
             children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(40),
-                  onTap: () => modalBottomSheet(context, const Profile()),
-                  child: ProfileImage(
-                    width: 44,
-                    height: 44,
-                    image: authState?.photo?.asImage ?? const SizedBox(),
-                  ),
-                ),
-              ),
-              Text(l10n.workout, style: textTheme.titleLarge),
+              AppBarWidget(title: l10n.workout),
               const SizedBox(height: 20),
               ...workout
                       ?.mapIndexed(
@@ -79,7 +66,7 @@ class _WorkoutState extends ConsumerState<Workout> {
                             context,
                             WorkoutDetail(
                               workout: e,
-                              onEditWorkout: ()=> onEditWorkout(e, i),
+                              onEditWorkout: () => onEditWorkout(e, i),
                             ),
                           ).whenComplete(updateUi),
                           child: WorkoutHistory(
@@ -105,18 +92,9 @@ class _WorkoutState extends ConsumerState<Workout> {
           Positioned(
             bottom: 18,
             right: 22,
-            child: ElevatedButton(
-              onPressed: addButtonTap,
-              style: const ButtonStyle(
-                maximumSize: MaterialStatePropertyAll(Size(139, 36)),
-                minimumSize: MaterialStatePropertyAll(Size(129, 36)),
-              ),
-              child: Text(
-                l10n.addWorkout,
-                style: textTheme.headlineMedium?.copyWith(
-                  color: AppColors.whiteColor,
-                ),
-              ),
+            child: SmallButton(
+              title: l10n.addWorkout,
+              onTap: addButtonTap,
             ),
           ),
         ],
