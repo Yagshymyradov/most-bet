@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../components/cell_with_ratings.dart';
-import '../../../data/workout_history_controller.dart';
-import '../../../data/workout_history_model.dart';
-import '../../../l10n/l10n.dart';
-import '../../../utils/assets.dart';
-import '../../../utils/extensions.dart';
-import '../../../utils/theme/theme.dart';
+import '../../components/cell_with_ratings.dart';
+import '../../data/workout_history_controller.dart';
+import '../../data/workout_history_model.dart';
+import '../../l10n/l10n.dart';
+import '../../utils/assets.dart';
+import '../../utils/extensions.dart';
+import '../../utils/theme/theme.dart';
 
 class WorkoutDetail extends StatelessWidget {
   final WorkoutHistoryModel workout;

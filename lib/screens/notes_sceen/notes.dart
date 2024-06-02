@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../components/app_bar_widget.dart';
 import '../../components/modal_bottom_sheet.dart';
+import '../../components/note_tile.dart';
 import '../../components/small_buttons.dart';
 import '../../l10n/l10n.dart';
 import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
 import 'add_notes.dart';
+import 'note_detail.dart';
 
 class Notes extends StatefulWidget {
   const Notes({super.key});
@@ -38,40 +40,15 @@ class _NotesState extends State<Notes> {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
-              Text(
-                'Help for yoga',
-                style: textTheme.titleMedium,
+              InkWell(
+                onTap: () => modalBottomSheet(
+                  context,
+                  const NoteDetail(),
+                ).whenComplete(() => setState(() {})),
+                child: const NoteTile(),
               ),
-              Text(
-                '20.01.2024',
-                style: textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 6),
-              const Divider(),
-              const SizedBox(height: 16),
-              Text(
-                'Help for yoga',
-                style: textTheme.titleMedium,
-              ),
-              Text(
-                '20.01.2024',
-                style: textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 6),
-              const Divider(),
-              const SizedBox(height: 16),
-              Text(
-                'Help for yoga',
-                style: textTheme.titleMedium,
-              ),
-              Text(
-                '20.01.2024',
-                style: textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 6),
-              const Divider(),
-              const SizedBox(height: 16),
+              const NoteTile(),
+              const NoteTile(),
             ],
           ),
           Positioned(

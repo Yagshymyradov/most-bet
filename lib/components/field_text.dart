@@ -26,7 +26,7 @@ class FieldText extends StatelessWidget {
   final VoidCallback? onTogglePasscodeVisibilityTap;
   final String? Function(String?)? validator;
   final String? Function(String?)? onChanged;
-  final int maxLines;
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;

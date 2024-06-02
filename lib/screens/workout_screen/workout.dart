@@ -9,12 +9,9 @@ import '../../components/workout_history.dart';
 import '../../data/workout_history_controller.dart';
 import '../../data/workout_history_model.dart';
 import '../../l10n/l10n.dart';
-import '../../provider.dart';
 import '../../utils/extensions.dart';
-import '../../utils/theme/theme.dart';
-import 'add_update_workout/add_update_workout.dart';
-import 'profile.dart';
-import 'workout_detail/workout_detail.dart';
+import 'add_update_workout.dart';
+import 'workout_detail.dart';
 
 class Workout extends ConsumerStatefulWidget {
   const Workout({super.key});
