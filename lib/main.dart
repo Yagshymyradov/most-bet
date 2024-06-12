@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/service/preferences.dart';
+import 'data/statistic_model.dart';
 import 'data/workout_history_model.dart';
 import 'l10n/l10n.dart' as l10n;
 import 'provider.dart';
@@ -18,7 +19,11 @@ Future<void> main() async {
   Hive.registerAdapter(WorkoutHistoryModelAdapter());
   Hive.registerAdapter(EmotionsAdapter());
 
+  Hive.registerAdapter(StatisticModelAdapter());
+  Hive.registerAdapter(MonthAdapter());
+
   await Hive.openBox<WorkoutHistoryModel>('workout_history');
+  await Hive.openBox<StatisticModel>('statistic');
 
   final sharedPrefs = await SharedPreferences.getInstance();
 
