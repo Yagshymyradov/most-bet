@@ -10,22 +10,58 @@ import '../../data/statistic_model.dart';
 import '../../data/workout_history_model.dart';
 import '../../l10n/l10n.dart';
 import '../../utils/assets.dart';
-import '../../utils/enums.dart';
 import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
+import 'add_another_statistica.dart';
 
-class AddStatistic extends StatefulWidget {
+class AddStatistic extends ConsumerStatefulWidget {
   const AddStatistic({super.key});
 
   @override
-  State<AddStatistic> createState() => _AddStatisticState();
+  ConsumerState<AddStatistic> createState() => _AddStatisticState();
 }
 
-class _AddStatisticState extends State<AddStatistic> {
+class _AddStatisticState extends ConsumerState<AddStatistic> {
   final typeWorkoutController = TextEditingController();
   final timeSpendController = TextEditingController();
   Month? selectedMonth;
   Emotions? selectedEmotion;
+  bool addAnotherWorkout = false;
+  bool workoutAdded = false;
+
+  void onAddAnotherWorkoutTap() {
+    addAnotherWorkout = true;
+    setState(() {
+      //no-op
+    });
+  }
+
+  void addStatisticButton() {
+    if (selectedMonth == null || selectedEmotion == null) return;
+
+    workoutAdded = true;
+    setState(() {
+      //no-op
+    });
+
+    final statisticRepo = ref.read(statisticProvider.notifier);
+    statisticRepo.repo?.addToStatisticList(
+      StatisticModel(
+        type: typeWorkoutController.text,
+        month: selectedMonth ?? Month.january,
+        timeSpent: int.parse(timeSpendController.text),
+        emotion: selectedEmotion ?? Emotions.blush,
+      ),
+    );
+    Navigator.pop(context);
+  }
+
+  void onEmotionsTap(Emotions emotion) {
+    selectedEmotion = emotion;
+    setState(() {
+      //no-op
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,29 +82,7 @@ class _AddStatisticState extends State<AddStatistic> {
               ),
             ),
             IconButton(
-              onPressed: () {
-                final scope = ProviderScope.containerOf(context, listen: false);
-                final statisticRepo = scope.read(statisticProvider.notifier).repo;
-                statisticRepo?.addToStatisticList(
-                  StatisticModel(
-                    january: [
-                      StatisticDetails(
-                        emotion: selectedEmotion ?? Emotions.blush,
-
-                        month: selectedMonth ?? Month.january,
-                        timeSpent: int.parse(timeSpendController.text),
-                      ),
-                    ],
-                    february: [
-                      StatisticDetails(
-                        emotion: selectedEmotion ?? Emotions.blush,
-                        month: selectedMonth ?? Month.january,
-                        timeSpent: int.parse(timeSpendController.text),
-                      ),
-                    ],
-                  ),
-                );
-              },
+              onPressed: addStatisticButton,
               icon: AppIcons.add.svgPicture(),
             ),
           ],
@@ -80,7 +94,7 @@ class _AddStatisticState extends State<AddStatistic> {
           children: Emotions.values
               .map(
                 (e) => ChooseEmotion(
-                  onTap: () {},
+                  onTap: () => onEmotionsTap(e),
                   emotions: e,
                   backgroundColor: selectedEmotion == e ? AppColors.primaryColor : null,
                 ),
@@ -125,10 +139,16 @@ class _AddStatisticState extends State<AddStatistic> {
         Align(
           alignment: Alignment.centerRight,
           child: SmallButton(
-            onTap: (){},
+            onTap: onAddAnotherWorkoutTap,
             title: l10n.addAnotherWorkout,
           ),
         ),
+        if (addAnotherWorkout)
+          AddAnotherWorkout(
+            selectedMonth: selectedMonth,
+            selectedEmotion: selectedEmotion,
+            workoutAdded: workoutAdded,
+          ),
       ],
     );
   }

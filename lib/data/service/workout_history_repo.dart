@@ -2,8 +2,6 @@ import 'package:hive/hive.dart';
 
 import '../workout_history_model.dart';
 
-
-
 class WorkoutHistoryRepo {
   String workoutHistory = 'workout_history';
 
