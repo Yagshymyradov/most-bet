@@ -112,8 +112,8 @@ class _StatisticState extends ConsumerState<Statistic> {
                           selectedMonth[index].timeSpent.toString(),
                           style: textTheme.titleLarge?.copyWith(
                             color: order == 0 || order == 3
-                                ? AppColors.whiteColor
-                                : AppColors.primaryColor,
+                                ? AppColors.primaryColor
+                                : AppColors.whiteColor,
                           ),
                         ),
                         backgroundColor: order == 1 || order == 2 ? AppColors.primaryColor : null,

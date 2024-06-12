@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'data/notes_model.dart';
 import 'data/service/preferences.dart';
 import 'data/statistic_model.dart';
 import 'data/workout_history_model.dart';
@@ -22,8 +23,11 @@ Future<void> main() async {
   Hive.registerAdapter(StatisticModelAdapter());
   Hive.registerAdapter(MonthAdapter());
 
+  Hive.registerAdapter(NotesModelAdapter());
+
   await Hive.openBox<WorkoutHistoryModel>('workout_history');
   await Hive.openBox<StatisticModel>('statistic');
+  await Hive.openBox<NotesModel>('notes');
 
   final sharedPrefs = await SharedPreferences.getInstance();
 
