@@ -11,7 +11,7 @@ class NotesRepo {
     return _hive.values.toList();
   }
 
-  List<NotesModel> addToNodesList(NotesModel notes) {
+  List<NotesModel> addToNotesList(NotesModel notes) {
     _hive.add(notes);
     return _hive.values.toList();
   }

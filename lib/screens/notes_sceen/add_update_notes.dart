@@ -35,7 +35,7 @@ class _AddUpdateNotesState extends State<AddUpdateNotes> {
     final scope = ProviderScope.containerOf(context, listen: false);
     final notes = scope.read(notesProvider.notifier);
 
-    notes.repo?.addToNodesList(
+    notes.repo?.addToNotesList(
       NotesModel(
         title: helpYogaController.text,
         dateTime: dateTimeController.text,

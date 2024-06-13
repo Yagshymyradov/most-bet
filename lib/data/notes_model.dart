@@ -4,7 +4,7 @@ import 'package:uuid/uuid.dart';
 part 'notes_model.g.dart';
 
 @HiveType(typeId: 5)
-class NotesModel extends HiveObject {
+class NotesModel {
   @HiveField(0)
   final String id;
   @HiveField(1)

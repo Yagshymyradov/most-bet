@@ -24,7 +24,7 @@ class NotesController extends StateNotifier<List<NotesModel>?> {
   }
 
   void addNotes(NotesModel notes){
-    state = repo?.addToNodesList(notes);
+    state = repo?.addToNotesList(notes);
   }
 
   void updateNotes(int index, NotesModel notes){
