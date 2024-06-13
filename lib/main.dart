@@ -28,6 +28,7 @@ Future<void> main() async {
   await Hive.openBox<WorkoutHistoryModel>('workout_history');
   await Hive.openBox<StatisticModel>('statistic');
   await Hive.openBox<NotesModel>('notes');
+  await Hive.openBox<NotesModel>('favorite_notes');
 
   final sharedPrefs = await SharedPreferences.getInstance();
 
