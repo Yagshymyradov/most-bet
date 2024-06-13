@@ -7,9 +7,11 @@ import '../../components/modal_bottom_sheet.dart';
 import '../../components/note_tile.dart';
 import '../../components/small_buttons.dart';
 import '../../data/notes_controller.dart';
+import '../../data/notes_model.dart';
 import '../../l10n/l10n.dart';
+import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
-import 'add_notes.dart';
+import 'add_update_notes.dart';
 import 'note_detail.dart';
 
 class Notes extends ConsumerStatefulWidget {
@@ -20,11 +22,26 @@ class Notes extends ConsumerStatefulWidget {
 }
 
 class _NotesState extends ConsumerState<Notes> {
+  void updateUi() {
+    setState(() {
+      //no-op
+    });
+  }
+
   void onAddNotesTap() {
     modalBottomSheet(
       context,
-      const AddNotes(),
-    ).whenComplete(() => setState(() {}));
+      const AddUpdateNotes(),
+    ).whenComplete(updateUi);
+  }
+
+  void onNotesEdit(NotesModel notes, int index) {
+    Navigator.pop(context);
+
+    modalBottomSheet(
+      context,
+      AddUpdateNotes(notes: notes, index: index),
+    ).whenComplete(updateUi);
   }
 
   @override
@@ -56,14 +73,13 @@ class _NotesState extends ConsumerState<Notes> {
                     ),
                   ],
                 ),
-                ...notes.map(
-                  (e) => InkWell(
+                ...notes.mapIndexed(
+                  (e, i) => InkWell(
                     onTap: () => modalBottomSheet(
                       context,
                       NoteDetail(
-                        title: e.title,
-                        dateTime: e.dateTime,
-                        note: e.note,
+                        notes: e,
+                        onNotesEdit: ()=> onNotesEdit(e, i),
                       ),
                     ).whenComplete(() => setState(() {})),
                     child: NoteTile(

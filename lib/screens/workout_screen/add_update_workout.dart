@@ -114,9 +114,7 @@ class _AddWorkoutState extends ConsumerState<AddUpdateWorkout> {
         intensity: intensityValue,
       ),
     );
-    setState(() {
-
-    });
+    updateUi();
     Navigator.pop(context);
   }
 

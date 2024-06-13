@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/notes_controller.dart';
+import '../../data/notes_model.dart';
 import '../../utils/assets.dart';
 import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
 
 class NoteDetail extends StatelessWidget {
-  final String title;
-  final String dateTime;
-  final String note;
+  final NotesModel notes;
+  final VoidCallback onNotesEdit;
 
   const NoteDetail({
     super.key,
-    required this.title,
-    required this.dateTime,
-    required this.note,
+    required this.notes,
+    required this.onNotesEdit
   });
+
+  void onDeleteButtonTap(BuildContext context) {
+    final scope = ProviderScope.containerOf(context, listen: false);
+    final history = scope.read(notesProvider.notifier);
+    history.repo?.removeFromNotesList(notes.id);
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +34,7 @@ class NoteDetail extends StatelessWidget {
         Row(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () => onDeleteButtonTap(context),
               icon: AppIcons.delete.svgPicture(),
             ),
             const Expanded(child: SizedBox()),
@@ -35,18 +43,18 @@ class NoteDetail extends StatelessWidget {
               icon: AppIcons.favorite.svgPicture(),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: onNotesEdit,
               icon: AppIcons.pen.svgPicture(),
             ),
           ],
         ),
         const SizedBox(height: 3),
-        Text(title, style: textTheme.titleLarge),
+        Text(notes.title, style: textTheme.titleLarge),
         const SizedBox(height: 10),
-        Text(dateTime, style: textTheme.bodyLarge),
+        Text(notes.dateTime, style: textTheme.bodyLarge),
         const SizedBox(height: 16),
         Text(
-          note,
+          notes.note,
           style: textTheme.bodyLarge?.copyWith(color: AppColors.blackColor),
         ),
       ],
