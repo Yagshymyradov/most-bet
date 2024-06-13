@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum AppIcons {
+  salad('salad'),
+  running('running'),
+  oil('oil'),
   fitness('fitness'),
   favorite('favorite'),
   tick('tick'),
