@@ -5,7 +5,16 @@ import '../../utils/extensions.dart';
 import '../../utils/theme/theme.dart';
 
 class NoteDetail extends StatelessWidget {
-  const NoteDetail({super.key});
+  final String title;
+  final String dateTime;
+  final String note;
+
+  const NoteDetail({
+    super.key,
+    required this.title,
+    required this.dateTime,
+    required this.note,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +41,12 @@ class NoteDetail extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 3),
-        Text('Help for yoga', style: textTheme.titleLarge),
+        Text(title, style: textTheme.titleLarge),
         const SizedBox(height: 10),
-        Text('22.01.2024', style: textTheme.bodyLarge),
+        Text(dateTime, style: textTheme.bodyLarge),
         const SizedBox(height: 16),
         Text(
-          'Lorem ipsum dolor sit amet consectetur. In neque leo varius phasellus tincidunt cras eget nunc. Posuere viverra commodo integer odio lectus. Erat urna et amet nibh et. Eu ut mattis dignissim augue. Lorem ipsum dolor sit amet consectetur. In neque leo varius phasellus tincidunt cras eget nunc. Posuere viverra commodo integer odio lectus. Erat urna et amet nibh et. Eu ut mattis dignissim augue. Lorem ipsum dolor sit amet consectetur. In neque leo varius phasellus tincidunt cras eget nunc. Posuere viverra commodo integer odio lectus. Erat urna et amet nibh et. Eu ut mattis dignissim augue.Lorem ipsum dolor sit amet consectetur. In neque leo varius phasellus tincidunt cras eget nunc. Posuere viverra commodo integer odio lectus. Erat urna et amet nibh et. Eu ut mattis dignissim augue.',
+          note,
           style: textTheme.bodyLarge?.copyWith(color: AppColors.blackColor),
         ),
       ],

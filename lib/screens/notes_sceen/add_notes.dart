@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../components/field_text.dart';
+import '../../data/notes_controller.dart';
+import '../../data/notes_model.dart';
 import '../../l10n/l10n.dart';
 import '../../utils/assets.dart';
 import '../../utils/extensions.dart';
@@ -17,6 +20,21 @@ class _AddNotesState extends State<AddNotes> {
   final helpYogaController = TextEditingController();
   final dateTimeController = TextEditingController();
   final noteController = TextEditingController();
+
+  void onAddButtonTap() {
+    final scope = ProviderScope.containerOf(context, listen: false);
+    final notes = scope.read(notesProvider.notifier);
+
+    notes.repo?.addToNodesList(
+      NotesModel(
+        title: helpYogaController.text,
+        dateTime: dateTimeController.text,
+        note: noteController.text,
+      ),
+    );
+
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,24 +55,24 @@ class _AddNotesState extends State<AddNotes> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: onAddButtonTap,
               icon: AppIcons.add.svgPicture(),
             ),
           ],
         ),
         const SizedBox(height: 10),
         FieldText(
-          hintText: 'Help for yoga',
+          hintText: l10n.helpForYoga,
           controller: helpYogaController,
         ),
         const SizedBox(height: 16),
         FieldText(
-          hintText: 'Date',
+          hintText: l10n.chooseDate,
           controller: dateTimeController,
         ),
         const SizedBox(height: 16),
         FieldText(
-          hintText: 'Note',
+          hintText: l10n.notes,
           maxLines: null,
           controller: noteController,
         ),

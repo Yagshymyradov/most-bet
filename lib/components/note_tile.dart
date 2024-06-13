@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import '../utils/extensions.dart';
 
 class NoteTile extends StatelessWidget {
-  const NoteTile({super.key});
+  final String title;
+  final String dateTime;
+
+  const NoteTile({
+    super.key,
+    required this.title,
+    required this.dateTime,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +21,11 @@ class NoteTile extends StatelessWidget {
       children: [
         const SizedBox(height: 16),
         Text(
-          'Help for yoga',
+          title,
           style: textTheme.titleMedium,
         ),
         Text(
-          '20.01.2024',
+          dateTime,
           style: textTheme.bodyMedium,
         ),
         const SizedBox(height: 6),
