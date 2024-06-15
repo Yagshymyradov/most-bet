@@ -23,6 +23,7 @@ class EmptyIndicator extends StatelessWidget {
         const SizedBox(height: 134),
         Text(
           title,
+          textAlign: TextAlign.center,
           style: textTheme.titleLarge,
         ),
         const SizedBox(height: 20),

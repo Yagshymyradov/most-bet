@@ -112,8 +112,14 @@ class Profile extends ConsumerWidget {
           Text('${auth?.name}, ${auth?.age}', style: textTheme.titleLarge),
           const SizedBox(height: 10),
           Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: auth?.workoutTypes
-                    ?.map((e) => SmallButton(title: e.asValue(context)))
+                    ?.map(
+                      (e) => SmallButton(
+                        title: e.asValue(context),
+                      ),
+                    )
                     .toList(growable: false) ??
                 [],
           ),

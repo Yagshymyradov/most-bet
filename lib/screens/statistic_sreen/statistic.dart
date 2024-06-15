@@ -45,13 +45,13 @@ class _StatisticState extends ConsumerState<Statistic> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final textTheme = context.textTheme;
-    final statistic = ref.watch(statisticProvider.notifier).repo?.getStatisticList();
-    statistic?.forEach((element) {
+    final statistic = ref.watch(statisticProvider.notifier).repo?.getStatisticList() ?? [];
+    for (var element in statistic) {
       if (element.month == month) {
-        if (selectedMonth.contains(element)) return;
+        if (selectedMonth.contains(element)) continue;
         selectedMonth.add(element);
       }
-    });
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -62,7 +62,7 @@ class _StatisticState extends ConsumerState<Statistic> {
               slivers: [
                 SliverToBoxAdapter(child: AppBarWidget(title: l10n.statistic)),
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
-                if (statistic?.length == 0)
+                if (statistic.isEmpty)
                   SliverToBoxAdapter(
                     child: EmptyIndicator(
                       title: l10n.addMonthExperience,
@@ -129,14 +129,15 @@ class _StatisticState extends ConsumerState<Statistic> {
                 ],
               ],
             ),
-            Positioned(
-              bottom: 18,
-              right: 22,
-              child: SmallButton(
-                onTap: addStatisticButtonTap,
-                title: l10n.addStatistics,
+            if (statistic.isNotEmpty)
+              Positioned(
+                bottom: 18,
+                right: 22,
+                child: SmallButton(
+                  onTap: addStatisticButtonTap,
+                  title: l10n.addStatistics,
+                ),
               ),
-            ),
           ],
         ),
       ),

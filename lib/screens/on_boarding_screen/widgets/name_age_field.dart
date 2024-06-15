@@ -28,10 +28,9 @@ class _NameAgeFieldState extends State<NameAgeField> {
     widget.authModel.name = nameController.text;
     widget.authModel.age = ageController.text;
 
-    final fieldsIsNotEmpty = widget.authModel.name != null && widget.authModel.age != null;
-    if (fieldsIsNotEmpty) {
-      widget.onNextButtonTap();
-    }
+    final fieldsIsNotEmpty = widget.authModel.name!.isEmpty && widget.authModel.age!.isEmpty;
+    if (fieldsIsNotEmpty) return;
+    widget.onNextButtonTap();
   }
 
   void updateUi() {
@@ -47,6 +46,7 @@ class _NameAgeFieldState extends State<NameAgeField> {
 
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final fieldsIsNotEmpty = nameController.text.isNotEmpty && ageController.text.isNotEmpty;

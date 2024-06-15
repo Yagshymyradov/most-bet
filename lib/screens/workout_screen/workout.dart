@@ -45,7 +45,7 @@ class _WorkoutState extends ConsumerState<Workout> {
 
   @override
   Widget build(BuildContext context) {
-    final workout = ref.watch(workoutHistoryProvider.notifier).repo?.getWorkoutList();
+    final workout = ref.watch(workoutHistoryProvider.notifier).repo?.getWorkoutList() ?? [];
     final l10n = context.l10n;
 
     return Padding(
@@ -56,44 +56,42 @@ class _WorkoutState extends ConsumerState<Workout> {
             children: [
               AppBarWidget(title: l10n.workout),
               const SizedBox(height: 20),
-              ...workout
-                      ?.mapIndexed(
-                        (e, i) => InkWell(
-                          onTap: () => modalBottomSheet(
-                            context,
-                            WorkoutDetail(
-                              workout: e,
-                              onEditWorkout: () => onEditWorkout(e, i),
-                            ),
-                          ).whenComplete(updateUi),
-                          child: WorkoutHistory(
-                            title: e.title,
-                            dateTime: e.dateTime,
-                            duration: e.duration,
-                            emotion: e.emotion.asEmotion,
-                            stress: e.stress.toInt(),
-                            fatigue: e.fatigue.toInt(),
-                            intensity: e.intensity.toInt(),
-                          ),
-                        ),
-                      )
-                      .toList() ??
-                  [],
-              if (workout!.isEmpty)
+              ...workout.mapIndexed(
+                (e, i) => InkWell(
+                  onTap: () => modalBottomSheet(
+                    context,
+                    WorkoutDetail(
+                      workout: e,
+                      onEditWorkout: () => onEditWorkout(e, i),
+                    ),
+                  ).whenComplete(updateUi),
+                  child: WorkoutHistory(
+                    title: e.title,
+                    dateTime: e.dateTime,
+                    duration: e.duration,
+                    emotion: e.emotion.asEmotion,
+                    stress: e.stress.toInt(),
+                    fatigue: e.fatigue.toInt(),
+                    intensity: e.intensity.toInt(),
+                  ),
+                ),
+              ),
+              if (workout.isEmpty)
                 EmptyIndicator(
                   title: l10n.addFirstWorkout,
                   onPressed: addButtonTap,
                 ),
             ],
           ),
-          Positioned(
-            bottom: 18,
-            right: 22,
-            child: SmallButton(
-              title: l10n.addWorkout,
-              onTap: addButtonTap,
+          if (workout.isNotEmpty)
+            Positioned(
+              bottom: 18,
+              right: 22,
+              child: SmallButton(
+                title: l10n.addWorkout,
+                onTap: addButtonTap,
+              ),
             ),
-          ),
         ],
       ),
     );

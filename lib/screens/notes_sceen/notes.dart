@@ -140,14 +140,15 @@ class _NotesState extends ConsumerState<Notes> {
               ],
             ],
           ),
-          Positioned(
-            bottom: 18,
-            right: 22,
-            child: SmallButton(
-              onTap: onAddNotesTap,
-              title: l10n.addNotes,
+          if (notes.isNotEmpty && !showFavorite)
+            Positioned(
+              bottom: 18,
+              right: 22,
+              child: SmallButton(
+                onTap: onAddNotesTap,
+                title: l10n.addNotes,
+              ),
             ),
-          ),
         ],
       ),
     );
