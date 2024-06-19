@@ -2,17 +2,22 @@ import 'dart:io';
 
 import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 
 import '../../components/opstions_card.dart';
 import '../../components/profile_image.dart';
 import '../../components/small_buttons.dart';
+import '../../data/notes_model.dart';
+import '../../data/statistic_model.dart';
+import '../../data/workout_history_model.dart';
 import '../../l10n/l10n.dart';
 import '../../provider.dart';
 import '../../utils/assets.dart';
 import '../../utils/extensions.dart';
+import '../../utils/navigation.dart';
 import '../../utils/theme/theme.dart';
+import '../splash_screen.dart';
 
 enum ProfileOptions {
   shareApp,
@@ -75,6 +80,25 @@ class Profile extends ConsumerWidget {
     }
   }
 
+  Future<void> onDeleteButtonTap(BuildContext context, WidgetRef ref) async{
+    final auth = ref.read(authControllerProvider.notifier);
+
+    try{
+      await Hive.box<WorkoutHistoryModel>('workout_history').clear();
+      await Hive.box<StatisticModel>('statistic').clear();
+      await Hive.box<NotesModel>('notes').clear();
+      await Hive.box<NotesModel>('favorite_notes').clear();
+
+      await auth.logout();
+      if(context.mounted){
+        Navigator.pop(context);
+        await replaceRootScreen(context, const SplashScreen());
+      }
+    } catch(e){
+      //ignore
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authControllerProvider);
@@ -86,18 +110,29 @@ class Profile extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(width: 22),
-              Text(
-                l10n.profile,
-                style: textTheme.headlineMedium?.copyWith(
-                  color: AppColors.blackColor,
-                ),
+          IntrinsicHeight(
+            child: OverflowBox(
+              maxWidth: MediaQuery.sizeOf(context).width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () => onDeleteButtonTap(context, ref),
+                    icon: AppIcons.delete.svgPicture(),
+                  ),
+                  Text(
+                    l10n.profile,
+                    style: textTheme.headlineMedium?.copyWith(
+                      color: AppColors.blackColor,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: AppIcons.pen.svgPicture(),
+                  ),
+                ],
               ),
-              AppIcons.pen.svgPicture(),
-            ],
+            ),
           ),
           const SizedBox(height: 21),
           Align(
@@ -108,7 +143,7 @@ class Profile extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Text('${auth?.name}, ${auth?.age}', style: textTheme.titleLarge),
+          Text('${auth?.name} ${auth?.age}', style: textTheme.titleLarge),
           const SizedBox(height: 10),
           Wrap(
             spacing: 8,

@@ -4,7 +4,6 @@ import '../../../components/field_text.dart';
 import '../../../data/auth_model.dart';
 import '../../../l10n/l10n.dart';
 import '../../../utils/extensions.dart';
-import '../../../utils/theme/theme.dart';
 
 class NameAgeField extends StatefulWidget {
   final AuthModel authModel;
@@ -28,8 +27,6 @@ class _NameAgeFieldState extends State<NameAgeField> {
     widget.authModel.name = nameController.text;
     widget.authModel.age = ageController.text;
 
-    final fieldsIsNotEmpty = widget.authModel.name!.isEmpty && widget.authModel.age!.isEmpty;
-    if (fieldsIsNotEmpty) return;
     widget.onNextButtonTap();
   }
 
@@ -49,7 +46,6 @@ class _NameAgeFieldState extends State<NameAgeField> {
 
   @override
   Widget build(BuildContext context) {
-    final fieldsIsNotEmpty = nameController.text.isNotEmpty && ageController.text.isNotEmpty;
     final textTheme = context.textTheme;
     final l10n = context.l10n;
 
@@ -89,11 +85,6 @@ class _NameAgeFieldState extends State<NameAgeField> {
           const Spacer(),
           ElevatedButton(
             onPressed: whenTapNextButton,
-            style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(
-                fieldsIsNotEmpty ? null : AppColors.primaryColor.withOpacity(0.5),
-              ),
-            ),
             child: Text(
               l10n.next,
               style: textTheme.titleSmall,

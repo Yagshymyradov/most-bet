@@ -77,4 +77,14 @@ class UserStateController extends StateNotifier<UserState?> {
       //ignore
     }
   }
+
+  Future<void> logout() async {
+    state = null;
+
+    try {
+      await _service.remove(_UserState);
+    } catch (e) {
+      //ignore
+    }
+  }
 }
