@@ -25,6 +25,8 @@ dependencies:
   flutter_riverpod: ^2.5.1
 
   app_review: ^2.1.2+1
+  share_plus: ^9.0.0
+
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   uuid: ^4.4.0

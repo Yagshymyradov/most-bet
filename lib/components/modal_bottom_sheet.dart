@@ -7,6 +7,7 @@ Future<void> modalBottomSheet(BuildContext context, Widget content) {
     useRootNavigator: true,
     isScrollControlled: true,
     useSafeArea: true,
+    constraints: const BoxConstraints(minWidth: double.infinity),
     backgroundColor: AppColors.whiteColor,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(

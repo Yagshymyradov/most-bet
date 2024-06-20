@@ -4,6 +4,8 @@ import 'package:app_review/app_review.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/opstions_card.dart';
 import '../../components/profile_image.dart';
@@ -65,7 +67,9 @@ enum ProfileOptions {
       case ProfileOptions.rateApp:
         return onRateApp;
       case ProfileOptions.usageProfile:
+        return onUsageProfile;
       case ProfileOptions.resentProgress:
+        return onResentProgress;
     }
     return null;
   }
@@ -80,22 +84,40 @@ class Profile extends ConsumerWidget {
     }
   }
 
-  Future<void> onDeleteButtonTap(BuildContext context, WidgetRef ref) async{
+  Future<void> onDeleteResentButtonTap(BuildContext context, WidgetRef ref, {bool? delete}) async {
     final auth = ref.read(authControllerProvider.notifier);
 
-    try{
+    try {
       await Hive.box<WorkoutHistoryModel>('workout_history').clear();
       await Hive.box<StatisticModel>('statistic').clear();
       await Hive.box<NotesModel>('notes').clear();
       await Hive.box<NotesModel>('favorite_notes').clear();
 
-      await auth.logout();
-      if(context.mounted){
+      if (delete != null && delete) {
+        await auth.logout();
+      }
+      if (context.mounted) {
         Navigator.pop(context);
         await replaceRootScreen(context, const SplashScreen());
       }
-    } catch(e){
+    } catch (e) {
       //ignore
+    }
+  }
+
+  Future<void> onShareButtonTap() async {
+    await Share.share(
+      'https://apps.apple.com/app/universal-key/id6504188651',
+    );
+  }
+
+  Future<void> launchInBrowser() async {
+    final url = Uri.parse('https://www.termsfeed.com/live/e080369e-ab7f-4406-9c31-d348d0545400');
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
     }
   }
 
@@ -117,7 +139,7 @@ class Profile extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () => onDeleteButtonTap(context, ref),
+                    onPressed: () => onDeleteResentButtonTap(context, ref, delete: true),
                     icon: AppIcons.delete.svgPicture(),
                   ),
                   Text(
@@ -143,7 +165,10 @@ class Profile extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Text('${auth?.name} ${auth?.age}', style: textTheme.titleLarge),
+          Text(
+            auth?.name == '' ? 'Unnamed' : '${auth?.name} ${auth?.age}',
+            style: textTheme.titleLarge,
+          ),
           const SizedBox(height: 10),
           Wrap(
             spacing: 8,
@@ -170,7 +195,11 @@ class Profile extends ConsumerWidget {
             itemBuilder: (context, index) {
               final option = ProfileOptions.values[index];
               return OptionsCard(
-                onTap: option.onTap(onRateApp: onRateApp),
+                onTap: option.onTap(
+                    onShareApp: onShareButtonTap,
+                    onRateApp: onRateApp,
+                    onUsageProfile: launchInBrowser,
+                    onResentProgress: () => onDeleteResentButtonTap(context, ref)),
                 icons: option.asIcons,
                 title: option.asValue(context),
               );
