@@ -26,6 +26,20 @@ class ChooseWorkoutType extends StatefulWidget {
 class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
   List<WorkoutTypes> selectedTypes = [];
 
+  @override
+  void initState() {
+    initialValue();
+    super.initState();
+  }
+
+  void initialValue() {
+    final scope = ProviderScope.containerOf(context, listen: false);
+    final auth = scope.read(authControllerProvider);
+    if (auth?.workoutTypes != null) {
+      selectedTypes = auth!.workoutTypes!;
+    }
+  }
+
   void onWorkoutTypesTap(WorkoutTypes type) {
     if (selectedTypes.contains(type)) {
       selectedTypes.removeWhere((element) => element == type);

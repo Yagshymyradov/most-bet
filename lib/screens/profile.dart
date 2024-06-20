@@ -7,19 +7,20 @@ import 'package:hive/hive.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../components/opstions_card.dart';
-import '../../components/profile_image.dart';
-import '../../components/small_buttons.dart';
-import '../../data/notes_model.dart';
-import '../../data/statistic_model.dart';
-import '../../data/workout_history_model.dart';
-import '../../l10n/l10n.dart';
-import '../../provider.dart';
-import '../../utils/assets.dart';
-import '../../utils/extensions.dart';
-import '../../utils/navigation.dart';
-import '../../utils/theme/theme.dart';
-import '../splash_screen.dart';
+import '../components/opstions_card.dart';
+import '../components/profile_image.dart';
+import '../components/small_buttons.dart';
+import '../data/notes_model.dart';
+import '../data/statistic_model.dart';
+import '../data/workout_history_model.dart';
+import '../l10n/l10n.dart';
+import '../provider.dart';
+import '../utils/assets.dart';
+import '../utils/extensions.dart';
+import '../utils/navigation.dart';
+import '../utils/theme/theme.dart';
+import 'on_boarding_screen/on_boarding_screen.dart';
+import 'splash_screen.dart';
 
 enum ProfileOptions {
   shareApp,
@@ -71,7 +72,6 @@ enum ProfileOptions {
       case ProfileOptions.resentProgress:
         return onResentProgress;
     }
-    return null;
   }
 }
 
@@ -149,7 +149,7 @@ class Profile extends ConsumerWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () => navigateToScreen(context, const OnBoardingScreen()),
                     icon: AppIcons.pen.svgPicture(),
                   ),
                 ],
@@ -166,7 +166,7 @@ class Profile extends ConsumerWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            auth?.name == '' ? 'Unnamed' : '${auth?.name} ${auth?.age}',
+            auth?.name == '' ? 'Unnamed' : '${auth?.name}, ${auth?.age}',
             style: textTheme.titleLarge,
           ),
           const SizedBox(height: 10),

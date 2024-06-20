@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../components/field_text.dart';
 import '../../../data/auth_model.dart';
 import '../../../l10n/l10n.dart';
+import '../../../provider.dart';
 import '../../../utils/extensions.dart';
 
 class NameAgeField extends StatefulWidget {
@@ -34,6 +36,23 @@ class _NameAgeFieldState extends State<NameAgeField> {
     setState(() {
       //no-op
     });
+  }
+
+  @override
+  void initState() {
+    initialValue();
+    super.initState();
+  }
+
+  void initialValue() {
+    final scope = ProviderScope.containerOf(context, listen: false);
+    final auth = scope.read(authControllerProvider);
+    if (auth?.name != null) {
+      nameController.text = auth!.name!;
+    }
+    if (auth?.age != null) {
+      ageController.text = auth!.age!;
+    }
   }
 
   @override

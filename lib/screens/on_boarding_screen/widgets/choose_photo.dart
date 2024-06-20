@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../components/profile_image.dart';
 import '../../../data/auth_model.dart';
 import '../../../l10n/l10n.dart';
+import '../../../provider.dart';
 import '../../../utils/enums.dart';
 import '../../../utils/extensions.dart';
 import '../../../utils/theme/theme.dart';
@@ -23,6 +25,20 @@ class ChooseProfilePhoto extends StatefulWidget {
 
 class _ChooseProfilePhotoState extends State<ChooseProfilePhoto> {
   ProfilePhoto? profileImage;
+
+  @override
+  void initState() {
+    initialValue();
+    super.initState();
+  }
+
+  void initialValue() {
+    final scope = ProviderScope.containerOf(context, listen: false);
+    final auth = scope.read(authControllerProvider);
+    if (auth?.photo != null) {
+      profileImage = auth!.photo;
+    }
+  }
 
   void onProfileImageTap(ProfilePhoto photo) {
     profileImage = photo;

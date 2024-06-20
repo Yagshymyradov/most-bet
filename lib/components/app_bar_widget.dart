@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../provider.dart';
-import '../screens/workout_screen/profile.dart';
+import '../screens/profile.dart';
 import '../utils/extensions.dart';
 import 'modal_bottom_sheet.dart';
 import 'profile_image.dart';
