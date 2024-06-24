@@ -129,8 +129,7 @@ class Profile extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           IntrinsicHeight(
             child: OverflowBox(
@@ -166,7 +165,7 @@ class Profile extends ConsumerWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            auth?.name == '' ? 'Unnamed' : '${auth?.name}, ${auth?.age}',
+            l10n.user,
             style: textTheme.titleLarge,
           ),
           const SizedBox(height: 10),
@@ -182,7 +181,7 @@ class Profile extends ConsumerWidget {
                     .toList(growable: false) ??
                 [],
           ),
-          const Spacer(),
+          const SizedBox(height: 30),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

@@ -6,7 +6,6 @@ import '../../utils/theme/theme.dart';
 import '../main_screen.dart';
 import 'widgets/choose_photo.dart';
 import 'widgets/choose_workout_type.dart';
-import 'widgets/name_age_field.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -21,7 +20,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int selectedPage = 0;
 
   void onNextButtonTap() {
-    selectedPage == 2
+    selectedPage == 1
         ? replaceRootScreen<void>(context, const MainScreen())
         : controller.nextPage(
             duration: const Duration(milliseconds: 300),
@@ -41,7 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                3,
+                2,
                 (index) => Padding(
                   padding: const EdgeInsets.only(right: 4),
                   child: SizedBox(
@@ -71,10 +70,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   });
                 },
                 children: [
-                  NameAgeField(
-                    onNextButtonTap: onNextButtonTap,
-                    authModel: authModel,
-                  ),
                   ChooseProfilePhoto(
                     onNextButtonTap: onNextButtonTap,
                     authModel: authModel,

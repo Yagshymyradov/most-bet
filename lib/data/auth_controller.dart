@@ -9,22 +9,16 @@ import 'auth_model.dart';
 import 'service/preferences.dart';
 
 class UserState {
-  final String? name;
-  final String? age;
   final ProfilePhoto? photo;
   final List<WorkoutTypes>? workoutTypes;
 
   UserState({
-    this.name,
-    this.age,
     this.photo,
     this.workoutTypes,
   });
 
   factory UserState.fromJson(Map<String, dynamic> json) {
     return UserState(
-      name: json['name'] as String,
-      age: json['age'] as String,
       photo: ProfilePhoto.fromJson(json['photo'] as String),
       workoutTypes: (json['workoutTypes'] as List<dynamic>?)
           ?.map((e) => WorkoutTypes.fromJson(e as String))
@@ -33,8 +27,6 @@ class UserState {
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'name': name,
-        'age': age,
         'photo': photo,
         'workoutTypes': workoutTypes,
       };
@@ -63,8 +55,6 @@ class UserStateController extends StateNotifier<UserState?> {
 
   Future<void> onSignedIn(AuthModel authModel) async {
     final newState = UserState(
-      name: authModel.name,
-      age: authModel.age,
       photo: authModel.photo,
       workoutTypes: authModel.workoutTypes,
     );
