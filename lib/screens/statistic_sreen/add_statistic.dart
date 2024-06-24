@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../components/chooseEmotion.dart';
+import '../../components/choose_emotion.dart';
 import '../../components/field_text.dart';
 import '../../components/outlined_dropdown_button_form_field.dart';
 import '../../components/small_buttons.dart';

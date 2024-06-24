@@ -74,4 +74,3 @@ enum WorkoutTypes {
 
   static WorkoutTypes fromJson(String json)=> values.byName(json);
 }
-

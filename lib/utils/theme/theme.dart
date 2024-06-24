@@ -25,9 +25,9 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: const MaterialStatePropertyAll(AppColors.primaryColor),
-        minimumSize: const MaterialStatePropertyAll(Size(double.infinity, 63)),
-        shape: MaterialStatePropertyAll(
+        backgroundColor: const WidgetStatePropertyAll(AppColors.primaryColor),
+        minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 63)),
+        shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../components/chooseEmotion.dart';
+import '../../components/choose_emotion.dart';
 import '../../components/field_text.dart';
 import '../../components/rate_slider.dart';
 import '../../data/workout_history_controller.dart';

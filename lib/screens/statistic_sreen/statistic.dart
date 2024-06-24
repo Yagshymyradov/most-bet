@@ -46,7 +46,7 @@ class _StatisticState extends ConsumerState<Statistic> {
     final l10n = context.l10n;
     final textTheme = context.textTheme;
     final statistic = ref.watch(statisticProvider.notifier).repo?.getStatisticList() ?? [];
-    for (var element in statistic) {
+    for (final element in statistic) {
       if (element.month == month) {
         if (selectedMonth.contains(element)) continue;
         selectedMonth.add(element);

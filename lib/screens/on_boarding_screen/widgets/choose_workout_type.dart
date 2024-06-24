@@ -106,7 +106,7 @@ class _ChooseWorkoutTypeState extends State<ChooseWorkoutType> {
           ElevatedButton(
             onPressed: whenTapNextButton,
             style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(
+              backgroundColor: WidgetStatePropertyAll(
                 selectedTypes.isNotEmpty //
                     ? null
                     : AppColors.primaryColor.withOpacity(0.5),

@@ -109,7 +109,7 @@ class _ChooseProfilePhotoState extends State<ChooseProfilePhoto> {
               child: ElevatedButton(
                 onPressed: whenTapNextButton,
                 style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(
+                  backgroundColor: WidgetStatePropertyAll(
                     profileImage != null //
                         ? null
                         : AppColors.primaryColor.withOpacity(0.5),

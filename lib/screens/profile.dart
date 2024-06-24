@@ -195,10 +195,11 @@ class Profile extends ConsumerWidget {
               final option = ProfileOptions.values[index];
               return OptionsCard(
                 onTap: option.onTap(
-                    onShareApp: onShareButtonTap,
-                    onRateApp: onRateApp,
-                    onUsageProfile: launchInBrowser,
-                    onResentProgress: () => onDeleteResentButtonTap(context, ref)),
+                  onShareApp: onShareButtonTap,
+                  onRateApp: onRateApp,
+                  onUsageProfile: launchInBrowser,
+                  onResentProgress: () => onDeleteResentButtonTap(context, ref),
+                ),
                 icons: option.asIcons,
                 title: option.asValue(context),
               );

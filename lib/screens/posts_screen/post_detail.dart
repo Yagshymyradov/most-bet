@@ -32,7 +32,7 @@ class PostDetail extends StatelessWidget {
         Text(
           description,
           style: textTheme.titleMedium,
-        )
+        ),
       ],
     );
   }
