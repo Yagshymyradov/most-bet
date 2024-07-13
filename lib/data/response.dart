@@ -6,8 +6,8 @@ part 'response.g.dart';
 class ConfigResponse {
   final String codeTech;
   final String server1_0;
-  final bool isAllChangeURL;
-  final bool isDead;
+  final String isAllChangeURL;
+  final String isDead;
   final String lastDate;
   final String url_link;
   final String? token;

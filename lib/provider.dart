@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'data/api_client.dart';
 import 'data/auth_controller.dart';
+import 'data/json_http_client.dart';
 import 'data/service/preferences.dart';
 
 final appPrefsServiceProvider = Provider<AppPrefsService>(
@@ -14,4 +16,29 @@ final authControllerProvider = StateNotifierProvider<UserStateController, UserSt
     return UserStateController(appPrefs, initialState);
   },
   dependencies: [appPrefsServiceProvider],
+);
+
+final apiBaseUrlProvider = Provider((ref) => 'https://appstorage.org/api/');
+
+final httpClientProvider = Provider(
+  (ref) {
+    final httpClient = JsonHttpClient();
+
+    ref.listen(
+      apiBaseUrlProvider,
+      (previous, next) {
+        final apiBaseUrl = next;
+        httpClient.dio.options.baseUrl = apiBaseUrl;
+      },
+      fireImmediately: true,
+    );
+
+    return httpClient;
+  },
+  dependencies: [apiBaseUrlProvider],
+);
+
+final apiClientProvider = Provider(
+  (ref) => ApiClient(ref.watch(httpClientProvider)),
+  dependencies: [httpClientProvider],
 );

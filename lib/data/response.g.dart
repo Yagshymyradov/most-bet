@@ -10,8 +10,8 @@ ConfigResponse _$ConfigResponseFromJson(Map<String, dynamic> json) =>
     ConfigResponse(
       codeTech: json['codeTech'] as String,
       server1_0: json['server1_0'] as String,
-      isAllChangeURL: json['isAllChangeURL'] as bool,
-      isDead: json['isDead'] as bool,
+      isAllChangeURL: json['isAllChangeURL'] as String,
+      isDead: json['isDead'] as String,
       lastDate: json['lastDate'] as String,
       url_link: json['url_link'] as String,
       token: json['token'] as String?,
