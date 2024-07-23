@@ -9,7 +9,7 @@ import 'data/statistic_model.dart';
 import 'data/workout_history_model.dart';
 import 'l10n/l10n.dart' as l10n;
 import 'provider.dart';
-import 'screens/splash_screen.dart';
+import 'screens/home_screen/home.dart';
 import 'utils/theme/theme.dart';
 
 Future<void> main() async {
@@ -59,7 +59,7 @@ class MostBetApp extends StatelessWidget {
       localizationsDelegates: l10n.AppLocalizationsX.localizationsDelegates,
       locale: l10n.LocaleEnglish,
       theme: AppTheme.lightTheme,
-      home: const SplashScreen(),
+      home: const Home(),
     );
   }
 }
